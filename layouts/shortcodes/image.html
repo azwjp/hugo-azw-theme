@@ -1,6 +1,10 @@
 {{- $src := .Get "src" }}
-<p class="image has-text-centered">
-  <a href="{{$src}}" rel="lightbox[image]">
-    <img src="{{ $src }}" alt="{{ $src }}">
-  </a>
-</p>
+{{- $caption := .Get "caption" }}
+<figure class="aaa has-text-centered">
+  <p>
+    <a href="{{$src}}" rel="lightbox[image]">
+      <img src="{{ $src }}" alt="{{ $src }}">
+    </a>
+  </p>
+  <p>{{ $caption | safeHTML }}</p>
+</figure>

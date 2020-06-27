@@ -5,9 +5,9 @@ body {
   min-height: 100vh;
   background: linear-gradient(-15deg,#eee4e8,#f6f0fd);
   background-attachment: fixed;
-  
+
   font-family: ryo-gothic-plusn, sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   font-style: normal;
   max-width: 100%;
   overflow-wrap: break-word;
@@ -35,7 +35,7 @@ a:hover {
   text-align: center;
   font-size: 32px;
   font-family: vdl-admin, sans-serif;
-  font-weight: 400;  
+  font-weight: 400;
   font-style: normal;
 }
 
@@ -70,7 +70,7 @@ nav.header-navigation ul li {
               inset -7px -7px 20px rgba(255, 255, 255, 0),
               0px 0px 4px rgba(255, 255, 255, 0) !important;
 }
-nav.header-navigation ul li:hover {  
+nav.header-navigation ul li:hover {
   box-shadow: 7px 7px 15px rgba(170, 55, 109, .15),
               -7px -7px 20px rgba(255, 255, 255, 1),
               inset 0px 0px 4px rgba(255, 255, 255, 0),
@@ -116,6 +116,7 @@ article {
   box-shadow: inset 2px 2px 5px  rgba(170, 55, 109, 0.15),
               inset -2px -2px 5px rgba(255, 255, 255, 0.9);
   padding: 0.25em 2em;
+  font-weight: 400;
 }
 
 .article-meta-item{
@@ -155,6 +156,7 @@ article {
   display: flex;
   justify-content: center;
 }
+
 .article-continue:hover {
   box-shadow: 2px 2px 4px rgba(170, 55, 109, .15),
               -2px -2px 6px rgba(255, 255, 255, 1),
@@ -176,8 +178,10 @@ pre {
 .content h1 {
   color: #23111EBB;
   margin: auto;
-  font-weight: 300;
   font-size: 1.75em;
+  font-family: tbchibirgothicplusk-pro, sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 .content h2 {
   margin: 0.5em -0.5em;
@@ -239,6 +243,7 @@ aside {
   margin: 1em 0.5em 2em;
   padding: 1em 2em;
   font-size: 1rem;
+  font-weight: 400;
 }
 
 .widget-title {
@@ -405,4 +410,23 @@ ul#share-button li.share-button.pocket {
 
 ul#share-button li.share-button.line {
   background-color: #00c300;
+}
+
+/* for short codes */
+figure.aaa {
+    width: 80%;
+    background-color: #fff9;
+    border: solid 3px #fff;
+    padding: 24px 32px 12px;
+    margin: auto;
+    font-weight: 400;
+}
+
+.aaa img {
+    width: 100%;
+    margin: auto;
+    box-sizing: content-box;
+}
+.aaa p:not(:last-child) {
+    margin-bottom: 4px;
 }
