@@ -1,0 +1,33 @@
+<aside class="widget">
+  <h3 class="widget-title"> {{ T "widget_categories" }}</h3>
+  <div class="widget-body">
+    <ul>
+      {{ $current := ""}}
+      {{- range $name, $taxonomy := $.Site.Taxonomies.categories }}
+        {{- with $.Site.GetPage (printf "/categories/%s" $name) }}
+          <li class="list-item">
+            {{ if hasPrefix $name (printf "%s/" $current) }}{{ end }}
+            <a href="{{ .Permalink }}">{{ $name }}</a>
+            <span class="list-count">{{ $taxonomy.Count}}</span>
+          </li>
+          {{$current = $name}}
+        {{- end }}
+      {{- end }}
+    </ul>
+  </div>
+</aside>
+{{ define "category" }}
+<ul class="m-aside-widget__category-list">
+  {{ range . }}
+    <li class="m-aside-widget__category-list-item">
+      <a class="m-aside-widget__category-list-item-link" href="{{ .section.Permalink }}">
+        <span class="m-aside-widget__category-list-link-title">{{ .section.Title }}</span>
+        <span class="m-aside-widget__category-list-link-count"> ({{ len .all_child_pages }}) </span>
+      </a>
+      {{ if .child_section_category_data_list }}
+        {{ template "category" .child_section_category_data_list }}
+      {{ end }}
+    </li>
+  {{ end }}
+</ul>
+{{ end }}

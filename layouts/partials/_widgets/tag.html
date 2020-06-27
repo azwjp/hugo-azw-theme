@@ -1,0 +1,17 @@
+<aside class="widget">
+  <h3 class="widget-title"> {{ T "widget_tags" }}</h3>
+  <div class="widget-body">
+    <ul class="list-tags">
+      {{ range $name, $taxonomy := $.Site.Taxonomies.tags }}
+      {{ with $.Site.GetPage (printf "/tags/%s" $name) }}
+      <li class="list-item">
+          <a class="tag" href="{{ .Permalink }}">
+            {{ $name }}
+            <span class="list-count">{{ $taxonomy.Count}}</span>
+          </a>
+      </li>
+      {{ end }}
+      {{- end }}
+    </ul>
+  </div>
+</aside>

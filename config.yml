@@ -1,0 +1,63 @@
+baseURL: https://blog.azw.jp/
+theme: azw-theme
+title: 荏苒社 azw.jp
+defaultContentLanguage: ja
+footnoteReturnLinkContents: ↩
+hasCJKLanguage: true
+paginate: 7
+enableEmoji: true
+PygmentsCodeFences: false
+googleAnalytics: ""
+permalinks:
+  posts: /:year/:month/:filename/
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+taxonomies:
+    category : categories
+    tag : tags
+    series : series
+
+menu:
+  main:
+    - identifier: home
+      name: Blog Top
+      title: Blog Top
+      url: /
+      weight: 1
+
+    - identifier: web
+      name: About
+      title: About
+      url: https://azw.jp/
+      weight: 2
+
+  footer:
+    - identifier: disclaimer
+      name: Disclaimer
+      title: Disclaimer 免責事項
+      url: /disclaimer/
+      weight: 1
+
+
+
+params:
+  since: 2017
+  dateFormat: "2006-01-02"
+  enablePostCopyright: true
+  mainSections: ["posts"]
+
+  site:
+    title: Hugo
+    header: "/header-img.jpg"
+    headerSingle: "/header-img.jpg"
+
+  widgets:
+    #- board
+    - category
+    - tag
+    - recent_posts
+

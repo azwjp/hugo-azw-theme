@@ -1,11 +1,31 @@
 <!DOCTYPE html>
-<html>
-    {{- partial "head.html" . -}}
-    <body>
-        {{- partial "header.html" . -}}
-        <div id="content">
-        {{- block "main" . }}{{- end }}
-        </div>
-        {{- partial "footer.html" . -}}
-    </body>
+<html lang="{{ .Site.Language }}">
+
+<head>
+  {{ partial "head.html" . }}
+</head>
+
+<body ontouchstart>
+  {{- partial "header.html" . -}}
+  {{- block "header" . }}{{- end }}
+  <div class="columns is-desktop">
+    <div id="leftbar" class="column is-2-widescreen is-hidden-touch is-hidden-desktop-only">
+      {{- block "leftbar" . -}}{{- end }}
+    </div>
+    <main id="content" class="column
+          is-offset-0-widescreen is-7-widescreen
+          is-offset-1-desktop is-8-desktop
+          is-offset-0-tablet is-10-tablet" role="main">
+      {{- block "main" . }}{{- end }}
+    </main>
+    <div class="column
+          is-2-widescreen
+          is-offset-0-desktop is-3-desktop
+          is-offset-1-tablet is-10-tablet">
+      {{- partial "sidebar.html" . -}}
+    </div>
+  </div>
+  {{- partial "footer.html" . -}}
+</body>
+
 </html>

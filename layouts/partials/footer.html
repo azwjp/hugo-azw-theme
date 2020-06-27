@@ -1,0 +1,13 @@
+<footer class="footer has-text-centered">
+  <nav id="footer-navigation" class="footer-navigation" role="navigation">
+    <ul>
+      {{- range .Site.Menus.footer -}}
+        <li>
+          <a href="{{- .URL | safeURL }}">{{- .Title  }}</a>
+        </li>
+      {{- end}}
+    </ul>
+  </nav>
+
+  <p>Copyright © AZW, Akane Sayama. All rights reserved.</p>
+</footer>

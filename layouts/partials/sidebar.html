@@ -1,0 +1,7 @@
+<div class="sidebar menu">
+  <div>
+    {{ range $w := .Site.Params.widgets }}
+      {{- partial (printf "_widgets/%s.html" $w) $ }}
+    {{- end }}
+  </div>
+</div>

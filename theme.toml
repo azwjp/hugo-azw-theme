@@ -3,19 +3,13 @@
 
 name = "Azw Theme"
 license = "MIT"
-licenselink = "https://github.com/yourname/yourtheme/blob/master/LICENSE"
+licenselink = "https://github.com/azwjp/hugo-azw-theme/blob/master/LICENSE"
 description = ""
-homepage = "http://example.com/"
+homepage = "https://github.com/azwjp/hugo-azw-theme/"
 tags = []
 features = []
 min_version = "0.41.0"
 
 [author]
-  name = ""
-  homepage = ""
-
-# If porting an existing theme
-[original]
-  name = ""
-  homepage = ""
-  repo = ""
+  name = "Akane Sayama"
+  homepage = "https://azw.jp/"

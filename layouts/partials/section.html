@@ -1,0 +1,56 @@
+<article  class="content" id="{{ .Params.layout }}-{{ .Params.slug }}" class="article article-type-{{ .Params.layout }}" itemscope itemtype="https://schema.org/BlogPosting">
+
+  {{- if or (.Permalink) (.Title)}}
+  {{- partial "post/title.html" . }}
+  {{- end }}
+
+  <div class="article-meta">
+    {{- partial "post/article-meta.html" . }}
+  </div>
+
+  <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+    {{- with .Params.featured_image }}
+      <p class="image has-text-centered">
+        <a href="{{ . }}" data-lightbox="lightbox">
+          <img src="{{ . }}">
+        </a>
+      </p>
+    {{ end -}}
+    <div class="xToc">
+      <div class="xToc_title">目次</div>
+      {{ .TableOfContents }}
+    </div>
+    {{ .Content }}
+  </div>
+  
+  <div class="article-footer">
+    <ul id="share-button">
+      <li class="share-button twitter">
+        <a class="" href="http://twitter.com/intent/tweet?text={{ .Scratch.Get "page-title" }}&url={{ .Permalink }}" target="_blank" title="Twitter で共有">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+      <li class="share-button facebook">
+        <a class="" href="http://www.facebook.com/sharer.php?u={{ .Permalink }}&t={{ .Scratch.Get "page-title" }}" target="_blank" title="facebookで共有">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+      <li class="share-button hatena">
+        <a class="" href="http://b.hatena.ne.jp/add?mode=confirm&url={{ .Permalink }}&title={{ .Scratch.Get "page-title" }}" target="_blank" data-hatena-bookmark-title="{{ .Permalink }}" title="">
+          <div>B!</div>
+        </a>
+      </li>
+      <li class="share-button pocket">
+        <a class="" href="http://getpocket.com/edit?url={{ .Scratch.Get "page-title" }}" target="_blank" title="pocketで共有">
+          <i class="fab fa-get-pocket"></i>
+        </a>
+      </li>
+      <li class="share-button line">
+        <a class="" href="http://line.naver.jp/R/msg/text/?{{ .Scratch.Get "page-title" | urlize}}&url={{ .Permalink }}" target="_blank" title="LINEで送る">
+          <i class="fab fa-line"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+</article>
+{{- partial "post/nav.html" . }}

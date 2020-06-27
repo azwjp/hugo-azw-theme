@@ -1,0 +1,119 @@
+nav_all:
+  other: All
+nav_older:
+  other: Older
+nav_newer:
+  other: Newer
+
+
+page_home:
+  other: Home
+page_archive:
+  other: Archive
+page_archives:
+  other: Archives
+page_category:
+  other: Category
+page_categories:
+  other: Categories
+page_tag:
+  other: Tag
+page_tags:
+  other: Tags
+page_tagcloud:
+  other: Tag Cloud
+page_about:
+  other: About
+page_continue:
+  other: Read more
+
+pagination_next:
+  other: Next
+pagination_prev:
+  other: Prev
+pagination_page:
+  other: Page %d
+pagination_pageof:
+  other: Page %d of %s
+
+widget_search:
+  other: Search
+widget_board:
+  other: Board
+widget_archive:
+  other: Archive
+widget_tags:
+  other: Tags
+widget_categories:
+  other: Categories
+widget_tagcloud:
+  other: Tag Cloud
+widget_recent_posts:
+  other: Recent Posts
+
+
+profile_follow:
+  other: Follow
+profile_skill:
+  other: Skills
+profile_label:
+  other: Labels
+profile_work:
+  other: Works
+profile_project:
+  other: Projects
+profile_link:
+  other: Links
+
+insight_hint:
+  other: Type something...
+insight_posts:
+  other: Posts
+insight_pages:
+  other: Pages
+insight_categories:
+  other: Categories
+insight_tags:
+  other: Tags
+insight_untitled:
+  other: (Untitled)
+
+
+unit_word:
+  other: words
+unit_time:
+  other: minutes
+
+article_wordcount:
+  other: "Word Count: "
+article_readcount:
+  other: "Read Count: "
+article_more:
+  other: Read More
+article_comments:
+  other: Comments
+article_share:
+  other: Share
+article_catalogue:
+  other: Catalogue
+
+
+insight_hint: 
+  other: Type something...
+insight_posts: 
+  other: Posts
+insight_pages: 
+  other: Pages
+insight_categories:
+  other: Categories
+insight_tags:
+  other: Tags
+insight_untitled:
+  other: (Untitled)
+
+page_not_found_heading:
+  other: 404 Not Found
+page_not_found_body:
+  other: The page doesn't exist.
+page_not_found_back:
+  other: Go Back

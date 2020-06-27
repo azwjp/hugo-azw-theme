@@ -1,0 +1,11 @@
+<p class="site-title">{{.Site.Title}}</p>
+
+<nav id="header-navigation" class="header-navigation" role="navigation">
+  <ul>
+    {{- range .Site.Menus.main -}}
+      
+        <a href="{{- .URL | safeURL }}"><li>{{- .Title  }}</li></a>
+      
+    {{- end}}
+  </ul>
+</nav>

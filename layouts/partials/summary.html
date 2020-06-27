@@ -1,0 +1,35 @@
+<article class="article article-type-page">
+  {{- if or (.Permalink) (.Title)}}
+  {{- partial "post/title.html" . }}
+  {{- end }}
+  <div class="article-meta">
+    {{- partial "post/article-meta.html" . }}
+  </div>
+  {{- with .Params.featured_image }}
+    <p class="image has-text-centered">
+      <a href="{{ . }}" data-lightbox="lightbox">
+        <img src="{{ . }}">
+      </a>
+    </p>
+  {{ end -}}
+  
+  {{- if .Description }}
+    <div class="article-entry text-muted" itemprop="description">
+      {{- .Description -}}
+    </div>
+    <a class="{{ .Scratch.Get "article-title"}}" href="{{- .RelPermalink }}">
+      <div class="article-footer article-continue">
+        {{ T "page_continue" }}
+      </div>
+    </a>
+  {{ else if .Summary }}
+    <div class="article-entry text-muted" itemprop="description">
+      {{ .Summary }}...
+    </div>
+    <a class="{{ .Scratch.Get "article-title"}}" href="{{- .RelPermalink }}">
+      <div class="article-footer article-continue">
+        {{ T "page_continue" }}
+      </div>
+    </a>
+  {{- end }}
+</article>

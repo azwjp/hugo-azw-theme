@@ -1,0 +1,26 @@
+{{ if .Date }}
+  <span class="article-meta-item">
+    <i class="fas fa-calendar-day"></i>
+    <a href="{{- .Permalink }}">
+      <time datetime="{{ .Date }}" itemprop="publication-date ">{{- .Date.Format (.Site.Params.dateFormat | default "2006-01-02") }}</time>
+    </a>
+  </span>
+{{ end }}
+{{- with .Params.categories -}}
+  <span class="article-meta-item">
+    <i class="fas fa-folder"></i>
+    {{ $lastIndex := sub (len .) 1 }}
+    {{- range $index, $element := . }}
+      <a href="{{ "categories" | relLangURL }}/{{ $element | urlize }}/">{{ $element }}</a>{{ if lt $index $lastIndex }},{{ end }}
+    {{- end}}
+  </span>
+{{- end }}
+{{- with .Params.tags}}
+  <span class="article-tag">
+    <i class="fas fa-tag"></i>
+    {{ $lastIndex := sub (len .) 1 }}
+    {{- range $index, $element := . }}
+      <a class="article-tag-link" href="{{ "tags" | relLangURL }}/{{ $element | urlize }}/">{{ $element }}</a>{{ if lt $index $lastIndex }},{{ end }}
+    {{- end}}
+  </span>
+{{- end }}

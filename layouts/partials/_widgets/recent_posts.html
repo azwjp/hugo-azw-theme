@@ -1,0 +1,18 @@
+{{- if $.Site.RegularPages }}
+{{ $mainSections := .Site.Params.mainSections | default (slice "post") }}
+<aside class="widget">
+  <h3 class="widget-title">{{T "widget_recent_posts" }}</h3>
+  <div class="widget-body">
+    <ul>
+      {{- range first 5 (where .Site.RegularPages "Section" "in" $mainSections) }}
+        <li>
+          <a href="{{- .Permalink }}">{{ .Title }}</a>
+          <span class="list-date">
+            <time datetime="{{ .Date }}" itemprop="datePublished">{{- .Date.Format (.Site.Params.dateFormat | default "2006-01-02") }}</time>
+          </span>
+        </li>
+      {{- end }}
+    </ul>
+  </div>
+</aside>
+{{- end }}
