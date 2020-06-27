@@ -3,7 +3,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="format-detection" content="telephone=no,email=no,adress=no">
-<meta name="theme-color" content="#000000" />
+<meta name="theme-color" content="#f5f0fd" />
 {{- if .Keywords -}}{{ $kw := .Keywords -}}{{- else if .Site.Params.keywords -}}{{ $kw := .Site.Params.keywords -}}{{- end -}}
 {{ $length := len .Keywords | add -1 -}}
 <meta name="keywords" content="{{ range $i, $k := .Keywords }}{{ $k | safeHTML }}{{if lt $i $length }}, {{ end }}{{ end }}" />
@@ -42,13 +42,7 @@
 </script>
 {{ end }}
 {{ end }}
-<script>
-  (function(d) {
-    var config = {
-      kitId: 'twl5nii',
-      scriptTimeout: 3000,
-      async: true
-    },
-    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-  })(document);
-</script>
+
+{{ if (fileExists "layouts/partials/myhead.html") }}
+  {{- partial "myhead.html" . }}
+{{ end }}

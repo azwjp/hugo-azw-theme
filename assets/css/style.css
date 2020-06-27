@@ -3,12 +3,10 @@ body {
   display: flex;
   flex-flow: column;
   min-height: 100vh;
-  background: linear-gradient(-15deg,#eee4e8,#f6f0fd);
+  background: linear-gradient(-15deg,#e7d4df,#f5f0fd);
   background-attachment: fixed;
 
-  font-family: ryo-gothic-plusn, sans-serif;
   font-weight: 300;
-  font-style: normal;
   max-width: 100%;
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -34,9 +32,7 @@ a:hover {
   margin-top: 12px;
   text-align: center;
   font-size: 32px;
-  font-family: vdl-admin, sans-serif;
   font-weight: 400;
-  font-style: normal;
 }
 
 .header-image {
@@ -179,9 +175,7 @@ pre {
   color: #23111EBB;
   margin: auto;
   font-size: 1.75em;
-  font-family: tbchibirgothicplusk-pro, sans-serif;
   font-weight: 400;
-  font-style: normal;
 }
 .content h2 {
   margin: 0.5em -0.5em;
