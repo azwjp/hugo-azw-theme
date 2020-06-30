@@ -11,3 +11,7 @@
 
   <p>Copyright © AZW, Akane Sayama. All rights reserved.</p>
 </footer>
+
+{{ if (fileExists "layouts/partials/myhooter.html") }}
+  {{- partial "myhooter.html" . }}
+{{ end }}
