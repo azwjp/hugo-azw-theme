@@ -17,16 +17,20 @@
 {{- template "_internal/google_news.html" . -}}
 {{- template "_internal/schema.html" . -}}
 {{- template "_internal/twitter_cards.html" . -}}
+<!-- Styles and JS  library -->
 <script defer src="//use.fontawesome.com/releases/v5.6.3/js/all.js"></script>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
 {{ $css := resources.Get "css/style.css" | minify | fingerprint -}}
 <link rel="preload" href="{{ $css.RelPermalink }}" as="style">
 <link href="{{ $css.RelPermalink }}" rel="stylesheet" integrity="{{ $css.Data.integrity }}">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Light box -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>
+<!-- Tocbot -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.css">
+<!-- Google Analytics -->
 {{ if not .Site.IsServer }}
 {{ with .Site.GoogleAnalytics }}
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -40,7 +44,7 @@
 </script>
 {{ end }}
 {{ end }}
-
+<!-- User's header -->
 {{ if (fileExists "layouts/partials/myhead.html") }}
   {{- partial "myhead.html" . }}
 {{ end }}
