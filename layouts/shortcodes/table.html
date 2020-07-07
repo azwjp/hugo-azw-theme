@@ -1,5 +1,5 @@
 {{- $caption := .Get "caption" }}
-<figure class="aaa">
+<figure class="figure">
   <p class="has-text-centered">{{ $caption | safeHTML }}</p>
   {{.Inner | markdownify }}
 </figure>

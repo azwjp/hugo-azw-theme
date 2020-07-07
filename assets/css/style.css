@@ -413,7 +413,7 @@ ul#share-button li.share-button.line {
 }
 
 /* for short codes */
-figure.aaa {
+figure.figure {
     width: 80%;
     background-color: #fff9;
     border: solid 3px #fff;
@@ -422,11 +422,11 @@ figure.aaa {
     font-weight: 400;
 }
 
-.aaa img {
+.figure img {
     width: 100%;
     margin: auto;
     box-sizing: content-box;
 }
-.aaa p:not(:last-child) {
+.figure p:not(:last-child) {
     margin-bottom: 4px;
 }
