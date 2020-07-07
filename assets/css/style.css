@@ -28,6 +28,10 @@ a:hover {
   background-color: transparent;
 }
 
+strong {
+    color: rgb(110, 72, 81);
+}
+
 .site-title {
   margin-top: 12px;
   text-align: center;
@@ -80,6 +84,7 @@ nav.header-navigation ul li:hover {
              inset 0px -4px 4px rgba(255,255,255,0.9);
   background: linear-gradient(#fff4, #ffff);
 }
+
 nav.footer-navigation ul {
   text-align: center;
 }
@@ -122,6 +127,7 @@ article {
 .article-entry{
   padding: 2em 2em;
   background-color: #fff4;
+  line-height: 1.7;
 }
 @media (max-width: 659px) {
   .article-entry{
