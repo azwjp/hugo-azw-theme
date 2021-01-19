@@ -256,6 +256,10 @@ aside {
   font-size: 85%;
 }
 
+ul ul {
+    margin-left: 1em;
+}
+
 .list-count, .list-date {
   padding-left: 5px;
   color: #999;
