@@ -3,7 +3,7 @@ body {
   display: flex;
   flex-flow: column;
   min-height: 100vh;
-  background: linear-gradient(-15deg,#e7d4df,#f5f0fd);
+  background: linear-gradient(-15deg,#ffe7f3,#f9f9f9,#f9f9f9,#f9f9f9);
   background-attachment: fixed;
 
   font-weight: 300;
@@ -63,16 +63,16 @@ nav.header-navigation ul li {
   margin: 20px 1em;
   padding: 0.1em 2em;
   border-radius: 40px;
-  box-shadow: 7px 7px 15px rgba(170, 55, 109, 0.15),
-              -7px -7px 20px rgba(255, 255, 255, 1),
+  box-shadow: 6px 6px 14px rgba(170, 55, 109, 0.15),
+              -7px -7px 18px rgba(255, 255, 255, 1),
               inset 0px 0px 4px rgba(255, 255, 255, .2),
               inset 7px 7px 15px rgba(170, 55, 109, 0),
               inset -7px -7px 20px rgba(255, 255, 255, 0),
               0px 0px 4px rgba(255, 255, 255, 0) !important;
 }
 nav.header-navigation ul li:hover {
-  box-shadow: 7px 7px 15px rgba(170, 55, 109, .15),
-              -7px -7px 20px rgba(255, 255, 255, 1),
+  box-shadow: 6px 6px 14px rgba(170, 55, 109, .15),
+              -7px -7px 18px rgba(255, 255, 255, 1),
               inset 0px 0px 4px rgba(255, 255, 255, 0),
               inset 7px 7px 15px rgba(170, 55, 109, .15),
               inset -7px -7px 20px rgba(255, 255, 255, 1),
