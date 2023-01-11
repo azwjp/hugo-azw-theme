@@ -92,10 +92,7 @@ nav.footer-navigation ul {
 /* articles */
 article {
   border-radius: 6px;
-  box-shadow: 3px 3px 4px  rgba(170, 55, 109, 0.15),
-             -3px -3px 4px rgba(255,255,255,0.9);
   margin: 1em 0.5em 2em;
-  background-color: #f9f9f9;
 }
 
 @media (max-width: 659px) {
@@ -105,9 +102,12 @@ article {
 }
 
 .article-header{
+  border-radius: 6px;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   background: #fff6;
+  box-shadow: 3px 3px 4px  rgba(170, 55, 109, 0.15),
+             -3px -3px 4px rgba(255,255,255,0.9);
   padding: 1em 2em;
 }
 
@@ -126,13 +126,20 @@ article {
 }
 
 .article-entry{
-  padding: 2em 2em;
-  background-color: #fff4;
+  padding: 2em 1em;
   line-height: 1.7;
+}
+.article-entry p {
+  margin-right: 1em;
+  margin-left: 1.5em;
 }
 @media (max-width: 659px) {
   .article-entry{
-    padding: 2em 1.5em;
+    padding: 2em 0.5em;
+  }
+  .article-entry p {
+    margin-right: 0em;
+    margin-left: 0em;
   }
 }
 
@@ -140,12 +147,9 @@ article {
   color: rgb(29, 134, 167);
   background-color: transparent;
 }
+
 .article-entry p a:hover, a:hover .article-continue {
   text-decoration: underline;
-}
-
-.article-entry .xToc {
-  border: 2px solid white;
 }
 
 .article-continue {
@@ -218,12 +222,17 @@ pre {
 
 
 .xToc {
-  background-color: #fff9;
+  background-color: #fff;
   width: auto;
   margin: auto auto 3em 5%;
   padding: 1em 2em;
   line-height: 100%;
 }
+
+.article-entry .xToc {
+  border-left: solid 3px rgb(170, 73, 94);
+}
+
 .xToc .xToc_title{
   font-weight: 700;
   font-size: 125%;
