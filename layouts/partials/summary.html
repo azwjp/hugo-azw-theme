@@ -12,6 +12,13 @@
       </a>
     </p>
   {{ end }}{{ end -}}
+  {{- with .Params.featured_image }}
+    <p class="image has-text-centered">
+      <a href="{{ . }}" data-lightbox="lightbox">
+        <img src="{{ . }}">
+      </a>
+    </p>
+  {{ end -}}
 
   {{- if .Description }}
     <div class="article-entry text-muted" itemprop="description">
