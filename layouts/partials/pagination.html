@@ -1,0 +1,73 @@
+{{/*
+  Modified by Akane Sayama
+  Original source: https://github.com/gohugoio/hugo/blob/641390f8f5f5b0ffd57d0fea42ae97d22ab3741e/tpl/tplimpl/embedded/templates/pagination.html
+  License: Apache License Version 2.0, January 2004
+*/}}
+<ul class="pagination">
+  {{- with .Paginator }}
+    {{- $currentPageNumber := .PageNumber }}
+
+    {{- with .First }}
+      {{- if ne $currentPageNumber .PageNumber }}
+      <li class="page-item">
+        <a href="{{ .URL }}" aria-label="First" class="page-link" role="button">
+          <span aria-hidden="true">
+            <i class="fas fa-angles-left" aria-hidden="true"></i>
+          </span>
+        </a>
+      </li>
+      {{- end }}
+    {{- end }}
+
+    {{- with .Prev }}
+      <li class="page-item">
+        <a href="{{ .URL }}" aria-label="Previous" class="page-link" role="button">
+          <span aria-hidden="true">
+            <i class="fas fa-angle-left" aria-hidden="true"></i>
+          </span>
+        </a>
+      </li>
+    {{- end }}
+
+    {{- $slots := 5 }}
+    {{- $start := math.Max 1 (sub .PageNumber (math.Floor (div $slots 2))) }}
+    {{- $end := math.Min .TotalPages (sub (add $start $slots) 1) }}
+    {{- if lt (add (sub $end $start) 1) $slots }}
+      {{- $start = math.Max 1 (add (sub $end $slots) 1) }}
+    {{- end }}
+
+    {{- range $k := seq $start $end }}
+      {{- if eq $.Paginator.PageNumber $k }}
+      <li class="page-item active">
+        <span aria-current="page" aria-label="Page {{ $k }}" class="page-link" role="button">{{ $k }}</span>
+      </li>
+      {{- else }}
+      <li class="page-item">
+        <a href="{{ (index $.Paginator.Pagers (sub $k 1)).URL }}" aria-label="Page {{ $k }}" class="page-link">{{ $k }}</a>
+      </li>
+      {{- end }}
+    {{- end }}
+
+    {{- with .Next }}
+      <li class="page-item">
+        <a href="{{ .URL }}" aria-label="Next" class="page-link">
+          <span aria-hidden="true">
+            <i class="fas fa-angle-right" aria-hidden="true"></i>
+          </span>
+        </a>
+      </li>
+    {{- end }}
+
+    {{- with .Last }}
+      {{- if ne $currentPageNumber .PageNumber }}
+      <li class="page-item">
+        <a href="{{ .URL }}" aria-label="Last" class="page-link" role="button">
+          <span aria-hidden="true">
+            <i class="fas fa-angles-right" aria-hidden="true"></i>
+          </span>
+        </a>
+      </li>
+      {{- end }}
+    {{- end }}
+  {{- end }}
+</ul>

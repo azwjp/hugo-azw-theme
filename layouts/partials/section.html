@@ -1,12 +1,10 @@
 <article  class="content" id="{{ .Params.layout }}-{{ .Params.slug }}" class="article article-type-{{ .Params.layout }}" itemscope itemtype="https://schema.org/BlogPosting">
-
-  {{- if or (.Permalink) (.Title)}}
-  {{- partial "post/title.html" . }}
-  {{- end }}
-
-  <div class="article-meta">
+  <hgroup class="article-header">
+    {{- if or (.Permalink) (.Title)}}
+      {{- partial "post/title.html" . }}
+    {{- end }}
     {{- partial "post/article-meta.html" . }}
-  </div>
+  </hgroup>
 
   <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
     {{- with .Params.featured_image }}

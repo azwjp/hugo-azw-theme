@@ -1,10 +1,11 @@
 <article class="article article-type-page">
-  {{- if or (.Permalink) (.Title)}}
-  {{- partial "post/title.html" . }}
-  {{- end }}
-  <div class="article-meta">
+  <hgroup class="article-header">
+    {{- if or (.Permalink) (.Title)}}
+      {{- partial "post/title.html" . }}
+    {{- end }}
     {{- partial "post/article-meta.html" . }}
-  </div>
+  </hgroup>
+
   {{- with .Params.images }}{{ with index . 0 }}
     <p class="image has-text-centered">
       <a href="{{ . }}" data-lightbox="lightbox">
@@ -12,6 +13,7 @@
       </a>
     </p>
   {{ end }}{{ end -}}
+
   {{- with .Params.featured_image }}
     <p class="image has-text-centered">
       <a href="{{ . }}" data-lightbox="lightbox">
@@ -24,19 +26,15 @@
     <div class="article-entry text-muted" itemprop="description">
       {{- .Description -}}
     </div>
-    <a class="{{ .Scratch.Get "article-title"}}" href="{{- .RelPermalink }}">
-      <div class="article-footer article-continue">
-        {{ T "page_continue" }}
-      </div>
-    </a>
   {{ else if .Summary }}
     <div class="article-entry text-muted" itemprop="description">
       {{ .Summary }}...
     </div>
-    <a class="{{ .Scratch.Get "article-title"}}" href="{{- .RelPermalink }}">
-      <div class="article-footer article-continue">
-        {{ T "page_continue" }}
-      </div>
-    </a>
   {{- end }}
+  
+  <div class="article-footer">
+    <a class="article-continue {{ .Scratch.Get "article-title"}}" href="{{- .RelPermalink }}">
+          {{ T "page_continue" }}
+    </a>
+  </div>
 </article>
