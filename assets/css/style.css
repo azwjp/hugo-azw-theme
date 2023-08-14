@@ -86,6 +86,7 @@ nav.header-navigation ul li:hover {
              inset 0px -4px 4px rgba(255,255,255,0.9);
   background: linear-gradient(#fff4, #ffff);
   padding: 3rem 1.5rem 4rem 1.5rem;
+  margin-top: auto;
 }
 
 nav.footer-navigation ul {justify-content: space-around;
