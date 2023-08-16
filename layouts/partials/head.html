@@ -19,9 +19,9 @@
 <!-- Styles and JS  library -->
 <script defer src="//use.fontawesome.com/releases/v6.4.2/js/all.js"></script>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
-{{ $css := resources.Get "css/style.css" | minify | fingerprint -}}
-<link rel="preload" href="{{ $css.RelPermalink }}" as="style">
-<link href="{{ $css.RelPermalink }}" rel="stylesheet" integrity="{{ $css.Data.integrity }}">
+{{ $style := resources.Get "scss/style.scss" | toCSS | minify | fingerprint }}
+<link rel="preload" href="{{ $style.Permalink }}" as="style">
+<link href="{{ $style.RelPermalink }}" rel="stylesheet" integrity="{{ $style.Data.integrity }}">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- Light box -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet">
