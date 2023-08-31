@@ -299,28 +299,36 @@ pre {
   }
 
   h2 {
-    margin: 0.5em -0.5em;
-    padding: 0.5em 1em;
-    border-radius: 0.75rlh;
+    margin: 0.5em -32px;
+    padding: 1em 1em;
+    border-radius: 0;
     color: #e05a8d;
-    box-shadow: 3px 3px 4px $boxShadowColor,
-                -3px -3px 4px $boxShadowHighlightColor;
-
+    background: #ff008006;
+    box-shadow: inset 0px 6px 3px  $boxShadowColor,
+                inset 0px -6px 3px $boxShadowHighlightColor;
   }
 
   h3 {
-    display: block;
+    margin: 0.5em -0.5em;
+    padding: 0.5em 1em;
+    border-radius: 0.5rlh;
+    color: #e05a8d;
+    box-shadow: 3px 3px 4px $boxShadowColor,
+                -3px -3px 4px $boxShadowHighlightColor;
+  }
+
+  h4 {
+    display: flex;
     color: rgb(170, 73, 94);
     padding: 0.4em 0.5em;
     margin-left: -0.5em;
     margin-right: -0.5em;
     &:after{
       content: "";
-      display: block;
-      margin: 12px -0.5em 0 -0.5em;
-      width: calc(100% + 1em);
-      height: 8px;
-      border-radius: 4px;
+      flex-grow: 1;
+      margin: auto -0.5em auto 1em;
+      height: 4px;
+      border-radius: 2px;
       line-height: 1;
       opacity: 100;
       box-shadow: 2px 2px 2px  $boxShadowColor inset,
@@ -328,7 +336,7 @@ pre {
     }
   }
 
-  h4, h5, h6 {
+  h5, h6 {
     color: rgb(170, 73, 94);
     padding-left: 6px;
   }
