@@ -1,10 +1,12 @@
-$backgroundColor: #E7E1ED;
+$backgroundColor: mix(#FCF7F9, #E7E1ED);
+$textBackgroundColor: lighten($backgroundColor, 2%);
 $linkHoverColor: rgb(24, 188, 238);
 $linkColor: #666;
 $strongTextColor: rgb(110, 72, 81);
-$boxShadowColor: rgba(170, 55, 109, 0.15);
+$boxShadowColor: saturate(darken($backgroundColor, 10%), 25%); //rgba(170, 55, 109, 0.15);
 $boxShadowHighlightColor:rgba(255, 255, 255, 1);
 $boxShadowEnlightColor:rgba(255, 255, 255, 0.2);
+$secondColor: rgb(171, 202, 121);
 
 $sp: 768px;
 $pc: 1024px;
@@ -15,12 +17,7 @@ $pc: 1024px;
   }
 }
 @mixin mobile { // mobile, tablet
-  @media (min-width: ($sp + 1)) {
-    @content;
-  }
-}
-@mixin desktop { // desktop
-  @media (min-width: ($pc + 1)) {
+  @media (max-width: ($pc)) {
     @content;
   }
 }
@@ -39,6 +36,12 @@ body {
   word-wrap: break-word;
 }
 
+main.column {
+  @include mobile {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
 
 a {
   color: $linkColor;
@@ -125,13 +128,15 @@ nav {
 article {
   border-radius: 16px;
   margin: 1em 0.5em 2em;
-  background-color: #FCF7F9;
+  background-color: $textBackgroundColor;
   padding: 16px;
   box-shadow: 6px 6px 6px  $boxShadowColor,
              -6px -6px 6px $boxShadowHighlightColor;
 
-  @include smaller {
-    margin: 1em 0em 2em;
+  @include mobile {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0.5em;
   }
 }
 
@@ -151,10 +156,6 @@ article {
 .article-entry{
   padding: 2em 1em;
   line-height: 1.7;
-  
-  @include smaller {
-    padding: 2em 0.5em;
-  }
 
   p {
     margin-right: 1em;
@@ -173,6 +174,15 @@ article {
         text-decoration: underline;
       }
     }
+  }
+  table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    @include smaller {
+      width: 100%;
+    }
+    
   }
 }
 
@@ -290,23 +300,36 @@ pre {
 
   h2 {
     margin: 0.5em -0.5em;
-    padding: 0.4em 0.5em;
-    border-radius: 5px;
+    padding: 0.5em 1em;
+    border-radius: 0.75rlh;
     color: #e05a8d;
-    box-shadow: 2px 2px 3px  rgba(203, 61, 87, 0.4),
-                -2px -2px 3px $boxShadowHighlightColor;
+    box-shadow: 3px 3px 4px $boxShadowColor,
+                -3px -3px 4px $boxShadowHighlightColor;
+
   }
 
   h3 {
+    display: block;
     color: rgb(170, 73, 94);
-    border-bottom: solid 4px rgb(171, 202, 121);
-    padding-left: 6px;
-    padding-bottom: 4px;
+    padding: 0.4em 0.5em;
+    margin-left: -0.5em;
+    margin-right: -0.5em;
+    &:after{
+      content: "";
+      display: block;
+      margin: 12px -0.5em 0 -0.5em;
+      width: calc(100% + 1em);
+      height: 8px;
+      border-radius: 4px;
+      line-height: 1;
+      opacity: 100;
+      box-shadow: 2px 2px 2px  $boxShadowColor inset,
+                  -2px -2px 2px $boxShadowHighlightColor inset;
+    }
   }
 
   h4, h5, h6 {
     color: rgb(170, 73, 94);
-    border-left: solid 4px rgb(171, 202, 121);
     padding-left: 6px;
   }
 }
@@ -359,7 +382,7 @@ aside {
   box-shadow: inset 4px 4px 4px  $boxShadowColor,
               inset -4px -4px 6px $boxShadowHighlightColor;
   margin: 1em 0.5em 2em;
-  padding: 1em 2em;
+  padding: 1em 1em;
   font-size: 1rem;
   font-weight: 400;
 }
@@ -369,13 +392,14 @@ aside {
   margin-bottom: 0.5rem;
 }
 
-.widget-body ul li * {
-  line-height: 1.75;
-  font-size: 85%;
-}
-
-ul li {
+.widget-body ul {
+  ul {
     margin-left: 1em;
+  }
+  li * {
+    line-height: 1.75;
+    font-size: 85%;
+  }
 }
 
 .list-count, .list-date {
@@ -383,14 +407,12 @@ ul li {
   color: #999;
   font-size: 75%;
   font-weight: 300;
-}
-
-.list-count:before, .list-date:before {
-  content: "(";
-}
-
-.list-count:after, .list-date:after {
-  content: ")";
+  &:before {
+    content: "(";
+  }
+  &:after {
+    content: ")";
+  }
 }
 
 .toc {
@@ -405,7 +427,7 @@ ul li {
   }
 }
 
-.is-active-link::before {
+.is-active-link:before {
   background-color: rgb(24, 188, 238) !important;
 }
 
@@ -415,21 +437,20 @@ ul.list-tags {
     margin-right: 8px;
     margin-bottom: 8px;
     
-    &:hover .tag  {
+    .tag {
+      border-radius: 3px;
+      background-color: #fff3;
       box-shadow: 2px 2px 4px $boxShadowColor,
                   -2px -2px 6px $boxShadowHighlightColor,
-                  inset 7px 7px 15px $boxShadowColor,
-                  inset -7px -7px 20px $boxShadowHighlightColor,
-                  0px 0px 4px rgba(255, 255, 255, .2) !important;
+                  inset 0px 0px 4px rgba(255, 255, 255, .2);
+      &:hover  {
+        box-shadow: 2px 2px 4px $boxShadowColor,
+                    -2px -2px 6px $boxShadowHighlightColor,
+                    inset 7px 7px 15px $boxShadowColor,
+                    inset -7px -7px 20px $boxShadowHighlightColor,
+                    0px 0px 4px rgba(255, 255, 255, .2) !important;
+      }
     }
-  }
-
-  .tag {
-    border-radius: 3px;
-    background-color: #fff3;
-    box-shadow: 2px 2px 4px $boxShadowColor,
-                -2px -2px 6px $boxShadowHighlightColor,
-                inset 0px 0px 4px rgba(255, 255, 255, .2);
   }
 }
 
@@ -527,11 +548,15 @@ ul#share-button {
 /* for short codes */
 figure.figure {
   width: 80%;
-  background-color: #fff9;
-  border: solid 3px #fff;
   padding: 24px 32px 12px;
   margin: auto;
   font-weight: 400;
+  border-radius: 16px;
+  box-shadow: inset 4px 4px 8px  $boxShadowColor,
+              inset -4px -4px 8px $boxShadowHighlightColor,
+              4px 4px 8px  $boxShadowColor,
+              -4px -4px 8px $boxShadowHighlightColor
+              ;
   img {
       width: 100%;
       margin: auto;
