@@ -42,10 +42,10 @@
   {{ end }}
 {{ end }}
 
-<aside class="widget">
+<aside class="widget widget-category">
   <h3 class="widget-title"> {{ T "widget_categories" }}</h3>
   <div class="widget-body">
-    {{ $scratch.Set "parentCategory" nil}}
+    {{ $scratch.Set "parentCategory" nil }}
     {{ template "categorylist" . }}
   </div>
 </aside>

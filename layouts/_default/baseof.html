@@ -9,21 +9,7 @@
   {{- partial "header.html" . -}}
   {{- block "header" . }}{{- end }}
   <div class="columns is-desktop">
-    <div id="leftbar" class="column is-2-widescreen is-hidden-touch is-hidden-desktop-only">
-      {{- block "leftbar" . -}}{{- end }}
-    </div>
-    <main id="content" class="column
-          is-offset-0-widescreen is-8-widescreen
-          is-offset-0-desktop is-9-desktop
-          is-offset-0-tablet is-12-tablet" role="main">
-      {{- block "main" . }}{{- end }}
-    </main>
-    <div class="column
-          is-2-widescreen
-          is-offset-0-desktop is-3-desktop
-          is-offset-0-tablet is-12-tablet">
-      {{- partial "sidebar.html" . -}}
-    </div>
+    {{- block "main" . }}{{- end }}
   </div>
   {{- partial "footer.html" . -}}
 </body>

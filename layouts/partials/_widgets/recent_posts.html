@@ -1,16 +1,32 @@
 {{- if $.Site.RegularPages }}
 {{ $mainSections := .Site.Params.mainSections | default (slice "post") }}
-<aside class="widget">
+<aside class="widget widget-resent-posts">
   <h3 class="widget-title">{{T "widget_recent_posts" }}</h3>
   <div class="widget-body">
     <ul>
       {{- range first 5 (where .Site.RegularPages "Section" "in" $mainSections) }}
+      <a href="{{- .Permalink }}">
         <li>
-          <a href="{{- .Permalink }}">{{ .Title }}</a>
-          <span class="list-date">
-            <time datetime="{{ .Date }}" itemprop="datePublished">{{- .Date.Format (.Site.Params.dateFormat | default "2006-01-02") }}</time>
-          </span>
+            {{- if .Params.featured_image -}}
+              {{- if $src:= $.Page.Resources.GetMatch .Params.featured_image }}
+                {{- $preview := $src.Resize $.Site.Params.site.image_size_preview }}
+                <p class="featured-image" style="background-image: url({{ $preview.RelPermalink }});"></p>
+              {{- else }}
+                <p class="featured-image" style="background-image: url({{ .Params.featured_image }});"></p>
+              {{- end }}
+            {{- else if .Params.images }}
+              {{- with index .Params.images 0 }}
+                <p class="featured-image" style="background-image: url({{ . }});"></p>
+              {{ end -}}
+            {{ end -}}
+            <p class="widget-resent-posts-title">
+              {{ .Title }}
+              <span class="list-date">
+                <time datetime="{{ .Date }}" itemprop="datePublished">{{- .Date.Format (.Site.Params.dateFormat | default "2006-01-02") }}</time>
+              </span>
+            </p>
         </li>
+      </a>
       {{- end }}
     </ul>
   </div>

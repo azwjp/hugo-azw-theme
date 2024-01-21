@@ -1,19 +1,22 @@
-<article  class="content" id="{{ .Params.layout }}-{{ .Params.slug }}" class="article article-type-{{ .Params.layout }}" itemscope itemtype="https://schema.org/BlogPosting">
+
+<article class="content" id="{{ .Params.layout }}-{{ .Params.slug }}" class="article article-type-{{ .Params.layout }}" itemscope itemtype="https://schema.org/BlogPosting">
   <hgroup class="article-header">
     {{- if or (.Permalink) (.Title)}}
       {{- partial "post/title.html" . }}
     {{- end }}
-    {{- partial "post/article-meta.html" . }}
   </hgroup>
 
   <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
-    {{- with .Params.featured_image }}
-      <p class="image has-text-centered">
-        <a href="{{ . }}" data-lightbox="lightbox">
-          <img src="{{ . }}">
-        </a>
-      </p>
-    {{ end -}}
+  {{- with .Params.featured_image }}
+    {{- if $src:= $.Page.Resources.GetMatch . }}
+      {{ $preview := $src.Resize $.Site.Params.site.image_size_preview }}
+      <a class="featured-image has-text-centered" href="{{ $src.RelPermalink }}" data-lightbox="lightbox" style="background-image: url({{ $preview.RelPermalink }});"></a>
+    {{- else -}}
+      <a class="featured-image has-text-centered" href="{{ . }}" data-lightbox="lightbox" style="background-image: url({{ . }});"></a>
+    {{- end }}
+  {{- end -}}
+  
+  {{- partial "post/article-meta.html" . }}
     <div class="xToc">
       <div class="xToc_title">目次</div>
       {{ .TableOfContents }}

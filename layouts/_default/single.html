@@ -6,27 +6,37 @@
   {{- end}}
 {{- end}}
 
-{{- define "leftbar"}}
-<nav class="toc js-toc"></nav>
-<div>
-</div>
-{{- end}}
-
 {{- define "main"}}
-{{- partial "section.html" . }}
+<div id="leftbar" class="column is-2-widescreen is-hidden-desktop-only is-hidden-touch ">
+  <nav class="toc js-toc"></nav>
+    <div>
+    </div>
+</div>
+<main id="content" class="column
+      is-offset-0-widescreen is-8-widescreen
+      is-offset-0-desktop is-9-desktop
+      is-offset-0-tablet is-12-tablet" role="main">
+  {{- partial "section.html" . }}
 
-<script>
-tocbot.init({
-  // Where to render the table of contents.
-  tocSelector: '.js-toc',
-  // Where to grab the headings to build the table of contents.
-  contentSelector: '.js-toc-content',
-  // Which headings to grab inside of the contentSelector element.
-  headingSelector: 'h1, h2, h3',
-  // For headings inside relative or absolute positioned containers within content.
-  scrollSmooth: true,
-  positionFixedSelector: '.toc',
-  fixedSidebarOffset: 'auto',
-});
-</script>
+  <script>
+  tocbot.init({
+    // Where to render the table of contents.
+    tocSelector: '.js-toc',
+    // Where to grab the headings to build the table of contents.
+    contentSelector: '.js-toc-content',
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: 'h1, h2, h3',
+    // For headings inside relative or absolute positioned containers within content.
+    scrollSmooth: true,
+    positionFixedSelector: '.toc',
+    fixedSidebarOffset: 'auto',
+  });
+  </script>
+</main>
+<div class="column
+      is-2-widescreen
+      is-offset-0-desktop is-3-desktop
+      is-offset-0-tablet is-12-tablet">
+  {{- partial "sidebar.html" . -}}
+</div>
 {{- end}}

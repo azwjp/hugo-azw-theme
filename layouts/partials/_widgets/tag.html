@@ -1,7 +1,7 @@
-<aside class="widget">
+<aside class="widget list-tags">
   <h3 class="widget-title"> {{ T "widget_tags" }}</h3>
   <div class="widget-body">
-    <ul class="list-tags">
+    <ul>
       {{ range $name, $taxonomy := $.Site.Taxonomies.tags }}
       {{ with $.Site.GetPage (printf "/tags/%s" $name) }}
       <li class="list-item">

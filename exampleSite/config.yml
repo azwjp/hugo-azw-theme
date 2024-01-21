@@ -53,7 +53,9 @@ params:
   site:
     title: Hugo
     header: "/header-img.jpg"
-    headerSingle: "/header-img.jpg"
+    deafult_thumbnail: "no-thumbnail.jpg"
+    image_size_thumbnail: "640x q60"
+    image_size_preview: "1200x q80"
 
   widgets:
     #- board
