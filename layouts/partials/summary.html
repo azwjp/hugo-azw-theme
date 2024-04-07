@@ -22,8 +22,6 @@
     </hgroup>
   {{- end }}
 
-  {{- partial "post/article-meta.html" . }}
-
   <div class="article-entry text-muted" itemprop="description">
     {{- if .Description }}
         {{- .Description -}}
@@ -31,4 +29,6 @@
         {{ .Summary }}...
     {{- end }}
   </div>
+
+  {{- partial "post/article-meta.html" . }}
 </article>

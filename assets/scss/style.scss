@@ -18,7 +18,8 @@ $buttonCornerBlur: 14px;
 
 // mobile is not used for now
 $sp: 768px;
-//$pc: 1024px;
+$pc: 1024px;
+$wide: 1216px;
 
 @mixin smaller { // smaller
   @media (max-width: ($sp)) {
@@ -26,12 +27,23 @@ $sp: 768px;
   }
 }
 /*
-@mixin mobile { // mobile, tablet
+@mixin tablet { // mobile, tablet
   @media (max-width: ($pc)) {
     @content;
   }
 }
 */
+
+@mixin middle { // tablet
+  @media (((min-width: ($sp)) and (max-width: ($wide)))) {
+    @content;
+  }
+}
+@mixin wide { // tablet
+  @media (min-width: ($wide)) {
+    @content;
+  }
+}
 @mixin larger { // tablet, desktop
   @media (min-width: ($sp)) {
     @content;
@@ -98,6 +110,10 @@ nav {
   }
 }
 
+.text-muted {
+  color: #6F6F6F;
+}
+
 .site-title {
   margin-top: 12px;
   text-align: center;
@@ -132,33 +148,54 @@ nav {
   color: #23111EBB;
 }
 
-/* articles */
-article {
-  margin: 1em 0.5em 2em;
-  
-  @include smaller {
-    margin-left: 0;
-    margin-right: 0;
-    padding: 0;
+/* articles summary*/
+.article-list{
+  padding: 1em;
+  border-radius: $articleBoxCornerRadius;
+  background-color: $textBackgroundColor;
+  box-shadow: $articleBoxCornerShadowRadius $articleBoxCornerShadowRadius $articleBoxCornerShadowBlur $boxShadowColor,
+              (-$articleBoxCornerShadowRadius) (-$articleBoxCornerShadowRadius) $articleBoxCornerShadowBlur $boxShadowHighlightColor,
+              inset 0px 0px $articleBoxCornerAccentBlur $boxShadowEnlightColor;
+  @include larger{
   }
+  
+  .article-summary {
 
-  &.article-summary {
-    border-radius: $articleBoxCornerRadius;
-    background-color: $textBackgroundColor;
-    padding: 16px;
-    box-shadow: $articleBoxCornerShadowRadius $articleBoxCornerShadowRadius $articleBoxCornerShadowBlur $boxShadowColor,
-                (-$articleBoxCornerShadowRadius) (-$articleBoxCornerShadowRadius) $articleBoxCornerShadowBlur $boxShadowHighlightColor,
-                inset 0px 0px $articleBoxCornerAccentBlur $boxShadowEnlightColor;
+    &:not(:last-child):after{
+      content: "";
+      height: 4px;
+      border-radius: 2px;
+      line-height: 1;
+      opacity: 100;
+      box-shadow: 2px 2px 2px  $boxShadowColor inset,
+                  -2px -2px 2px $boxShadowHighlightColor inset;
+    }
     
     .article-header {
-      margin-top: 1em;
       h1 {
-        font-size: 1.5em;
-        font-weight: 400;
+        font-size: 1.73em;
+        font-weight: 600;
       }
     }
 
+    .article-meta{
+      padding: 0;
+      vertical-align: bottom;
+      background-color: inherit;
+      font-size: 80%;
+      .article-meta-item{
+        margin-right: 1em;
+      }
+    }
     @include smaller{
+      margin: 0;
+      padding: 0 8px;
+
+      &:not(:last-child):after{
+        margin: 2em 1em 2em 1em;
+        display: block;
+      }
+
       .featured-image {
         margin: 0 0 16px 0;
         height: 16em;
@@ -167,17 +204,33 @@ article {
           background-size: contain;
         }
       }
+      .article-meta{
+        margin-top: 0.5em;
+        text-align: left;
+      }
     }
     
     @include larger {
+      margin: 0;
+      padding: 0 16px;
+
       display: grid;
-      grid-template-columns: 240px auto;
+      grid-template-columns: 160px auto;
       grid-template-rows: auto 1fr auto;
-      padding: 0 1em 0 0;
       column-gap: 1em;
       row-gap: 1em;
       overflow: clip;
-      min-height: 240px;
+      min-height: 160px;
+      width: 100%;
+
+      &:not(:last-child):after{
+        grid-column: 1/4;
+        flex-grow: 1;
+        margin: 1em 1em 2em 1em;
+        border-radius: 2px;
+        line-height: 1;
+        opacity: 100;
+      }
       
       .article-header{
         z-index: 2;
@@ -187,10 +240,11 @@ article {
       .featured-image {
         grid-row: 1 / 4;
         grid-column: 1;
-        width: 240px;
+        width: 160px;
+        height: 160px;
         &::before{
-          max-height: 240px;
-          max-width: 240px;
+          max-height: 160px;
+          max-width: 160px;
         }
       }
 
@@ -211,13 +265,17 @@ article {
         grid-row: 3;
         grid-column: 2;
         padding: 0;
-        text-align: left;
-        vertical-align: bottom;
         z-index: 2;
-        background-color: inherit;
+        text-align: left;
       }
     }
   }
+}
+
+/* articles */
+article {
+  margin: 1em 0.5em 2em;
+    
 
   .article-footer {
     text-align: center;
@@ -383,19 +441,18 @@ article {
           }
         }
       }
+      .article-meta{
+        .article-meta-item{
+          margin-right: 1em;
+          border-radius: 14px;
+          padding: 0.5em 1em;
+          font-size: 80%;
+          font-weight: 400;
+          box-shadow: inset 2px 2px 5px  $boxShadowColor,
+                      inset -2px -2px 5px $boxShadowHighlightColor;
+        }
+      }
     }
-  }
-}
-
-.article-meta{
-  .article-meta-item{
-    margin-right: 1em;
-    border-radius: 14px;
-    padding: 0.5em 1em;
-    font-size: 80%;
-    font-weight: 400;
-    box-shadow: inset 2px 2px 5px  $boxShadowColor,
-                inset -2px -2px 5px $boxShadowHighlightColor;
   }
 }
 
@@ -412,7 +469,7 @@ article {
     content: '';
     background: inherit;
     background-size: cover;
-    background-position: top;
+    background-position: center;
     justify-content: center;
     align-items: center;
     vertical-align: middle;
