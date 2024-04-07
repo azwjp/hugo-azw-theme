@@ -13,7 +13,7 @@
         is-offset-0-tablet is-12-tablet" role="main">
         {{ $mainSections := .Site.Params.mainSections | default (slice "post") }}
         <div class="article-list">
-          {{ range (.Paginate (where .Site.RegularPages "Section" "in" $mainSections) 5).Pages }}
+          {{ range (.Paginate (where .Site.RegularPages "Section" "in" $mainSections) .Site.Params.site.listSize).Pages }}
             {{- partial "summary.html" . }}
           {{- end -}}
         </div>

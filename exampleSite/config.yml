@@ -56,6 +56,7 @@ params:
     deafult_thumbnail: "no-thumbnail.jpg"
     image_size_thumbnail: "640x q60"
     image_size_preview: "1200x q80"
+    listSize: 5
 
   widgets:
     #- board
