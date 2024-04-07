@@ -337,13 +337,6 @@ article {
           margin-left: 1em;
         }
       }
-    
-      .image img, .content img {
-        max-width: 80%;
-        max-height: 30rem;
-        margin: auto;
-        object-fit: contain;
-      }
       
       .featured-image {
         margin: 0 0 16px 0;
@@ -409,9 +402,9 @@ article {
       /* for short codes */
       figure.figure {
         background: #ff008006;
-        width: 80%;
+        max-width: unquote('min(800px, 80%)');
         padding: 24px 32px 12px;
-        margin: auto;
+        margin: 2rem auto;
         font-weight: 400;
         border-radius: 16px;
         box-shadow: inset 4px 4px 8px  $boxShadowColor,
@@ -424,6 +417,7 @@ article {
           width: 95%;
         }
         img {
+            max-height: 600px;
             width: 100%;
             margin: auto;
             box-sizing: content-box;
@@ -455,7 +449,6 @@ article {
     }
   }
 }
-
 
 .featured-image {
   display: flex;
