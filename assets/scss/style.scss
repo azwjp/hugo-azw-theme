@@ -1,14 +1,20 @@
-$backgroundColor: darken(mix(#FCF7F9, #E7E1ED), 5%);
-$textBackgroundColor:lighten($backgroundColor, 8.5%);//#f7f5f5;//
-$figureBackgroundColor: darken($textBackgroundColor, 5%);
-$linkHoverColor: rgb(24, 188, 238);
+@use 'sass:color';
+$firstColor: hsl(337, 68%, 62%);// 224, 92, 143
+$firstColor2: hsl(346, 50%, 50%); // 191, 64, 93
+$firstColor3: hsl(346, 21%, 36%);
+$secondColor: hsl(83, 68%, 62%);
+$secondColor2: hsl(83, 55%, 45%); // 171, 202, 121
+$secondColor3: hsl(83, 35%, 62%);
+$backgroundColor: rgb(231, 220, 233);
+$textBackgroundColor: scale-color($backgroundColor, $lightness: 80%);
+$textBackgroundColor2: rgb(249, 239, 246);
+$linkHoverColor: hsl(194, 86%, 51%); //rgb(24, 188, 238);
 $linkColor: #666;
-$strongTextColor: rgb(110, 72, 81);
-$imageBackgroundColor: darken(#E7E1ED, 20%);
+$linkTextColor: hsl(194, 70%, 38%); //rgb(29, 134, 167);
+$strongTextColor: $secondColor2;
 $boxShadowColor: saturate(darken($backgroundColor, 10%), 25%); //rgba(170, 55, 109, 0.15);
 $boxShadowHighlightColor:rgba(255, 255, 255, 1);
 $boxShadowEnlightColor:rgba(255, 255, 255, 0.2);
-$secondColor: rgb(171, 202, 121);
 $articleBoxCornerShadowRadius: 6px;
 $articleBoxCornerShadowBlur: 14px;
 $articleBoxCornerAccentBlur: 4px;
@@ -78,6 +84,14 @@ a {
 
 strong {
     color: $strongTextColor;
+}
+
+em {
+  font-style: italic;
+  color: $firstColor3;
+  text-decoration:underline dashed rgba($firstColor2, 0.5) 0.125em;
+  text-decoration-skip-ink: auto;
+  text-underline-offset: 0.25em;
 }
 
 nav {
@@ -156,9 +170,7 @@ nav {
   box-shadow: $articleBoxCornerShadowRadius $articleBoxCornerShadowRadius $articleBoxCornerShadowBlur $boxShadowColor,
               (-$articleBoxCornerShadowRadius) (-$articleBoxCornerShadowRadius) $articleBoxCornerShadowBlur $boxShadowHighlightColor,
               inset 0px 0px $articleBoxCornerAccentBlur $boxShadowEnlightColor;
-  @include larger{
-  }
-  
+
   .article-summary {
 
     &:not(:last-child):after{
@@ -188,7 +200,6 @@ nav {
       }
     }
     @include smaller{
-      margin: 0;
       padding: 0 8px;
 
       &:not(:last-child):after{
@@ -274,8 +285,12 @@ nav {
 
 /* articles */
 article {
-  margin: 1em 0.5em 2em;
-    
+  @include smaller {
+    margin: 0;
+  }
+  @include larger {
+    margin: 1em 0.5em 2em;
+  }
 
   .article-footer {
     text-align: center;
@@ -308,22 +323,23 @@ article {
         margin-right: 2.5em;
         margin-left: 3em;
         @include smaller {
-          margin-right: 1.5em;
-          margin-left: 1.5em;
+          margin-right: 1em;
+          margin-left: 1em;
         }
       }
       
       &>p {
-        margin-top: 1.5em;
+        margin-top: 1em;
         margin-bottom: 1.5em;
       }
       p {
         a {
-          color: rgb(29, 134, 167);
+          color: $linkTextColor !important;
           background-color: transparent;
     
           &:hover {
             text-decoration: underline;
+            color: $linkHoverColor;
           }
         }
       }
@@ -355,30 +371,38 @@ article {
       }
 
       h2 {
-        margin: 0.5em 0;
+        margin: 1.5em 0 0.5em 0;
         padding: 1em 1em;
         border-radius: 0;
-        color: #e05a8d;
-        background: #f9eff6;
+        color: $firstColor;
+        background: $textBackgroundColor2;
         box-shadow: inset 0px 6px 3px  $boxShadowColor,
                     inset 0px -6px 3px $boxShadowHighlightColor;
+        @include smaller {
+          padding: 0.75em 0.5em;
+        }
       }
 
       h3 {
-        margin: 0.5em;
+        margin: 1em 0.5em;
         padding: 0.5em 1em;
-        border-radius: 0.5rlh;
-        color: #e05a8d;
+        border-radius: 1rlh;
+        color: $firstColor;
         box-shadow: 3px 3px 4px $boxShadowColor,
                     -3px -3px 4px $boxShadowHighlightColor;
+        @include smaller {
+          margin: 3px;
+        }
       }
 
       h4 {
         display: flex;
-        color: rgb(170, 73, 94);
+        color: $firstColor2;
         padding: 0.4em 0.5em;
-        margin-left: 0.5em;
-        margin-right: 0.5em;
+        margin: 0 1.5em 0.5em 1em;
+        @include smaller {
+          margin: 0 0.5em 0.5em 0.5em;
+        }
         &:after{
           content: "";
           flex-grow: 1;
@@ -393,15 +417,15 @@ article {
       }
 
       h5, h6 {
-        color: rgb(170, 73, 94);
-        padding-left: 6px;
+        color: $firstColor2;
+        margin-left: 2em;
       }
       .article-meta {
         margin: 1em 1em;
       }
       /* for short codes */
       figure.figure {
-        background: #ff008006;
+        background: $textBackgroundColor2;
         max-width: unquote('min(800px, 80%)');
         padding: 24px 32px 12px;
         margin: 2rem auto;
@@ -594,8 +618,18 @@ pre {
 
 .toc {
   font-weight: 300;
-  .is-active-link {
-    font-weight: 700;
+  .toc-link{
+    &:before {
+      background-color: $secondColor3;
+      width: 4px;
+    }
+    &.is-active-link {
+      font-weight: 700;
+  
+      &:before {
+        background-color: $firstColor;
+      }
+    }
   }
   .node-name--H3  {
     font-size: 85%;
@@ -721,10 +755,6 @@ aside {
   ol {
     margin: auto;
   }
-}
-
-.is-active-link:before {
-  background-color: rgb(24, 188, 238) !important;
 }
 
 
