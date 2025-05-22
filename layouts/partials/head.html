@@ -30,8 +30,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.css">
 <!-- Google Analytics -->
-{{ if not .Site.IsServer }}
-{{ with .Site.GoogleAnalytics }}
+{{ if not hugo.IsServer }}
+{{ with .Site.Config.Services.GoogleAnalytics.ID }}
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
 <script>
