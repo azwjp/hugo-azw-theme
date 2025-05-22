@@ -18,20 +18,7 @@
       is-offset-0-tablet is-12-tablet" role="main">
   {{- partial "section.html" . }}
 
-  <script>
-  tocbot.init({
-    // Where to render the table of contents.
-    tocSelector: '.js-toc',
-    // Where to grab the headings to build the table of contents.
-    contentSelector: '.js-toc-content',
-    // Which headings to grab inside of the contentSelector element.
-    headingSelector: 'h1, h2, h3',
-    // For headings inside relative or absolute positioned containers within content.
-    scrollSmooth: true,
-    positionFixedSelector: '.toc',
-    fixedSidebarOffset: 'auto',
-  });
-  </script>
+  {{ partial "tocbot-init.html" . }}
 </main>
 <div class="column
       is-2-widescreen

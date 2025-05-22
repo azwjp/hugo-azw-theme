@@ -3,9 +3,7 @@
 <nav id="header-navigation" class="header-navigation" role="navigation">
   <ul>
     {{- range .Site.Menus.main -}}
-
-        <a href="{{- .URL | safeURL }}"><li>{{- .Title  }}</li></a>
-
+      <li><a href="{{- .URL | safeURL }}">{{- .Title }}</a></li>
     {{- end}}
   </ul>
 </nav>

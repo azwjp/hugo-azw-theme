@@ -1,22 +1,21 @@
 <article class="article article-type-page article-summary">
+  {{- $imageURL := "" -}}
   {{- if .Params.featured_image -}}
-    {{- if $src:= $.Page.Resources.GetMatch .Params.featured_image }}
-      {{- $preview := $src.Resize $.Site.Params.site.image_size_preview }}
-      <a class="featured-image" href="{{- .RelPermalink }}" style="background-image: url({{ $preview.RelPermalink }});">
-      </a>
-    {{- else }}
-      <a class="featured-image" href="{{- .RelPermalink }}" style="background-image: url({{ .Params.featured_image }});">
-      </a>
-    {{- end }}
-  {{- else if .Params.images }}
-      <a class="featured-image" href="{{- .RelPermalink }}" style="background-image: url({{ index .Params.images 0 }});">
-      </a>
-  {{- else }}
-    <a class="featured-image" href="{{- .RelPermalink }}" style="background-image: url(/noimage.png);">
-    </a>
-  {{ end -}}
+    {{- if $src := $.Page.Resources.GetMatch .Params.featured_image -}}
+      {{- $preview := $src.Resize $.Site.Params.site.image_size_preview -}}
+      {{- $imageURL = $preview.RelPermalink -}}
+    {{- else -}}
+      {{- $imageURL = .Params.featured_image -}}
+    {{- end -}}
+  {{- else if .Params.images -}}
+    {{- $imageURL = index .Params.images 0 -}}
+  {{- else -}}
+    {{- $imageURL = "/noimage.png" -}}
+  {{- end -}}
 
-  {{- if or (.Permalink) (.Title)}}
+  <a class="featured-image" href="{{- .RelPermalink }}" style="background-image: url({{ $imageURL }});"></a>
+
+  {{- if or (.Permalink) (.Title) }}
     <hgroup class="article-header">
       {{- partial "post/title.html" . }}
     </hgroup>
