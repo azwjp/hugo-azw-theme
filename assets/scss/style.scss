@@ -1,11 +1,11 @@
 @use 'sass:color';
 $firstColor: hsl(337, 68%, 62%);// 224, 92, 143
-$firstColor2: hsl(346, 50%, 50%); // 191, 64, 93
-$firstColor3: hsl(346, 21%, 36%);
+$firstColor2: hsl(337, 50%, 50%); // 191, 64, 93
+$firstColor3: hsl(337, 21%, 36%);
 $secondColor: hsl(83, 68%, 62%);
 $secondColor2: hsl(83, 55%, 45%); // 171, 202, 121
 $secondColor3: hsl(83, 35%, 62%);
-$backgroundColor: rgb(231, 220, 233);
+$backgroundColor: hsl(337, 20%, 98%);
 $textBackgroundColor: scale-color($backgroundColor, $lightness: 80%);
 $textBackgroundColor2: rgb(249, 239, 246);
 $linkHoverColor: hsl(194, 86%, 51%); //rgb(24, 188, 238);
@@ -159,7 +159,7 @@ nav {
 }
 
 .content h1 {
-  color: #23111EBB;
+  color: $firstColor;
 }
 
 /* articles summary*/
