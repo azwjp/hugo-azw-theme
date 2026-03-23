@@ -3,7 +3,12 @@
 <nav id="header-navigation" class="header-navigation" role="navigation">
   <ul>
     {{- range .Site.Menus.main -}}
-      <li><a href="{{- .URL | safeURL }}">{{- .Title }}</a></li>
+      <li>
+        <a href="{{- .URL | safeURL }}"{{ with .Params.target }} target="{{ . }}" rel="noopener noreferrer"{{ end }}>
+          {{- with .Params.icon }}<i class="{{ . }} fa-lg"></i> {{ end -}}
+          {{- .Title -}}
+        </a>
+      </li>
     {{- end}}
   </ul>
 </nav>

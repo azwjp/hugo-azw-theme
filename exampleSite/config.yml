@@ -34,6 +34,9 @@ menu:
       title: About
       url: https://azw.jp/
       weight: 2
+      params:
+        icon: fa-solid fa-globe
+        target: _blank
 
   footer:
     - identifier: disclaimer
