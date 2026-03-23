@@ -4,9 +4,9 @@
   <ul>
     {{- range .Site.Menus.main -}}
       <li>
-        <a href="{{- .URL | safeURL }}"{{ with .Params.target }} target="{{ . }}" rel="noopener noreferrer"{{ end }}>
+        <a href="{{- .URL | safeURL }}" title="{{- .Title }}"{{ with .Params.target }} target="{{ . }}" rel="noopener noreferrer"{{ end }}>
           {{- with .Params.icon }}<i class="{{ . }} fa-lg"></i> {{ end -}}
-          {{- .Title -}}
+          {{- .Name -}}
         </a>
       </li>
     {{- end}}

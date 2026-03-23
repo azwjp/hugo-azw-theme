@@ -3,7 +3,7 @@
     <ul>
       {{- range .Site.Menus.footer -}}
         <li>
-          <a href="{{- .URL | safeURL }}">{{- .Title  }}</a>
+          <a href="{{- .URL | safeURL }}" title="{{- .Title }}">{{- .Name }}</a>
         </li>
       {{- end}}
     </ul>
