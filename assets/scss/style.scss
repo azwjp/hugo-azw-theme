@@ -78,29 +78,29 @@ $dark-text-color: adjust-color($light-text-color, $lightness: 50%);
 }
 
 // Store CSS variables in SCSS variables for easier use in the rest of the file
-$firstColor: var(--first-color);
-$firstColor2: var(--first-color2);
-$firstColor3: var(--first-color3);
-$secondColor: var(--second-color);
-$secondColor2: var(--second-color2);
-$secondColor3: var(--second-color3);
-$backgroundColor: var(--background-color);
-$textBackgroundColor: var(--text-background-color);
-$textBackgroundColor2: var(--text-background-color2);
-$linkHoverColor: var(--link-hover-color);
-$linkColor: var(--link-color);
-$linkTextColor: var(--link-text-color);
-$strongTextColor: var(--strong-text-color);
-$boxShadowColor: var(--box-shadow-color);
-$boxShadowHighlightColor: var(--box-shadow-highlight-color);
-$boxShadowEnlightColor: var(--box-shadow-enlight-color);
-$textColor: var(--text-color);
-$articleBoxCornerShadowRadius: 6px;
-$articleBoxCornerShadowBlur: 14px;
-$articleBoxCornerAccentBlur: 4px;
-$articleBoxCornerRadius: 16px;
-$buttonCornerRadius: 16px;
-$buttonCornerBlur: 14px;
+$first-color: var(--first-color);
+$first-color2: var(--first-color2);
+$first-color3: var(--first-color3);
+$second-color: var(--second-color);
+$second-color2: var(--second-color2);
+$second-color3: var(--second-color3);
+$background-color: var(--background-color);
+$text-bg-color: var(--text-background-color);
+$text-bg-color2: var(--text-background-color2);
+$link-hover-color: var(--link-hover-color);
+$link-color: var(--link-color);
+$link-text-color: var(--link-text-color);
+$strong-text-color: var(--strong-text-color);
+$shadow-color: var(--box-shadow-color);
+$shadow-highlight-color: var(--box-shadow-highlight-color);
+$shadow-enlight-color: var(--box-shadow-enlight-color);
+$text-color: var(--text-color);
+$neu-radius: 6px;
+$neu-blur: 14px;
+$neu-accent-blur: 4px;
+$neu-corner-radius: 16px;
+$button-radius: 16px;
+$button-blur: 14px;
 
 $sp: 768px;
 $wide: 1216px;
@@ -130,33 +130,33 @@ $wide: 1216px;
 }
 
 // Neumorphism shadow mixins
-@mixin neu-raised($radius: $articleBoxCornerShadowRadius, $blur: $articleBoxCornerShadowBlur) {
-  box-shadow: $radius $radius $blur $boxShadowColor,
-              (-$radius) (-$radius) $blur $boxShadowHighlightColor,
-              inset 0px 0px $articleBoxCornerAccentBlur $boxShadowEnlightColor;
+@mixin neu-raised($radius: $neu-radius, $blur: $neu-blur) {
+  box-shadow: $radius $radius $blur $shadow-color,
+              (-$radius) (-$radius) $blur $shadow-highlight-color,
+              inset 0px 0px $neu-accent-blur $shadow-enlight-color;
 }
 
 @mixin neu-simple($radius: 3px, $blur: 4px) {
-  box-shadow: $radius $radius $blur $boxShadowColor,
-              (-$radius) (-$radius) $blur $boxShadowHighlightColor;
+  box-shadow: $radius $radius $blur $shadow-color,
+              (-$radius) (-$radius) $blur $shadow-highlight-color;
 }
 
 @mixin neu-hover {
-  box-shadow: 2px 2px 4px $boxShadowColor,
-              -2px -2px 6px $boxShadowHighlightColor,
-              inset 7px 7px 15px $boxShadowColor,
-              inset -7px -7px 20px $boxShadowHighlightColor,
-              0px 0px 4px $boxShadowEnlightColor;
+  box-shadow: 2px 2px 4px $shadow-color,
+              -2px -2px 6px $shadow-highlight-color,
+              inset 7px 7px 15px $shadow-color,
+              inset -7px -7px 20px $shadow-highlight-color,
+              0px 0px 4px $shadow-enlight-color;
 }
 
 @mixin neu-pressed($radius: 4px, $blur: 4px) {
-  box-shadow: inset $radius $radius $blur $boxShadowColor,
-              inset (-$radius) (-$radius) $blur $boxShadowHighlightColor;
+  box-shadow: inset $radius $radius $blur $shadow-color,
+              inset (-$radius) (-$radius) $blur $shadow-highlight-color;
 }
 
 @mixin neu-groove {
-  box-shadow: 2px 2px 2px $boxShadowColor inset,
-              -2px -2px 2px $boxShadowHighlightColor inset;
+  box-shadow: 2px 2px 2px $shadow-color inset,
+              -2px -2px 2px $shadow-highlight-color inset;
 }
 
 /* global settings */
@@ -164,9 +164,9 @@ body {
   display: flex;
   flex-flow: column;
   min-height: 100vh;
-  background: $backgroundColor;
+  background: $background-color;
   background-attachment: fixed;
-  color: $textColor;
+  color: $text-color;
   font-weight: 300;
   max-width: 100%;
   overflow-wrap: break-word;
@@ -174,25 +174,25 @@ body {
 }
 
 a {
-  color: $linkColor;
+  color: $link-color;
   border: 0;
   line-height: 32px;
   padding: 0;
 
   &:hover {
-    color: $linkHoverColor;
+    color: $link-hover-color;
     background-color: transparent;
   }  
 }
 
 strong {
-    color: $strongTextColor;
+    color: $strong-text-color;
 }
 
 em {
   font-style: italic;
-  color: $firstColor3;
-  text-decoration:underline dashed rgba($firstColor2, 0.5) 0.125em;
+  color: $first-color3;
+  text-decoration:underline dashed rgba($first-color2, 0.5) 0.125em;
   text-decoration-skip-ink: auto;
   text-underline-offset: 0.25em;
 }
@@ -206,15 +206,15 @@ nav {
         display: inline-block;
         margin: 20px 1em;
         padding: 0.1em 2em;
-        border-radius: $buttonCornerRadius;
-        @include neu-raised($blur: $buttonCornerBlur);
+        border-radius: $button-radius;
+        @include neu-raised($blur: $button-blur);
         
         &:hover {
-          box-shadow: $articleBoxCornerShadowRadius $articleBoxCornerShadowRadius $buttonCornerBlur $boxShadowColor,
-                      (-$articleBoxCornerShadowRadius) (-$articleBoxCornerShadowRadius) $buttonCornerBlur $boxShadowHighlightColor,
-                      inset $articleBoxCornerShadowRadius $articleBoxCornerShadowRadius $buttonCornerBlur $boxShadowColor,
-                      inset (-$articleBoxCornerShadowRadius) (-$articleBoxCornerShadowRadius) $buttonCornerBlur $boxShadowHighlightColor,
-                      0px 0px $articleBoxCornerAccentBlur $boxShadowEnlightColor;
+          box-shadow: $neu-radius $neu-radius $button-blur $shadow-color,
+                      (-$neu-radius) (-$neu-radius) $button-blur $shadow-highlight-color,
+                      inset $neu-radius $neu-radius $button-blur $shadow-color,
+                      inset (-$neu-radius) (-$neu-radius) $button-blur $shadow-highlight-color,
+                      0px 0px $neu-accent-blur $shadow-enlight-color;
         }
       }
     }
@@ -253,22 +253,22 @@ nav {
 }
 
 .footer {
-  box-shadow: inset 0px 4px 4px  $boxShadowColor,
-             inset 0px -4px 4px $boxShadowHighlightColor;
-  background: linear-gradient(rgba($backgroundColor, 0.4), rgba($backgroundColor, 1));
+  box-shadow: inset 0px 4px 4px  $shadow-color,
+             inset 0px -4px 4px $shadow-highlight-color;
+  background: linear-gradient(rgba($background-color, 0.4), rgba($background-color, 1));
   padding: 3rem 1.5rem 4rem 1.5rem;
   margin-top: auto;
 }
 
 .content h1 {
-  color: $firstColor;
+  color: $first-color;
 }
 
 /* articles summary */
 .article-list {
   padding: 1em;
-  border-radius: $articleBoxCornerRadius;
-  background-color: $textBackgroundColor;
+  border-radius: $neu-corner-radius;
+  background-color: $text-bg-color;
   @include neu-raised;
 }
 
@@ -309,7 +309,7 @@ nav {
     .featured-image {
       margin: 0 0 16px 0;
       height: 16em;
-      border-radius: $articleBoxCornerRadius $articleBoxCornerRadius 0 0;
+      border-radius: $neu-corner-radius $neu-corner-radius 0 0;
 
       &::before {
         background-size: contain;
@@ -397,7 +397,7 @@ article {
 }
 
 article.content h1 {
-  background: $textBackgroundColor;
+  background: $text-bg-color;
   margin-bottom: 1.5em;
   font-size: 1.75em;
   font-weight: 400;
@@ -409,8 +409,8 @@ article.content h1 {
 article.content .article-entry {
   padding-bottom: 2em;
   line-height: 1.75;
-  border-radius: $articleBoxCornerRadius;
-  background-color: $textBackgroundColor;
+  border-radius: $neu-corner-radius;
+  background-color: $text-bg-color;
   @include neu-raised;
 
   & > * {
@@ -428,12 +428,12 @@ article.content .article-entry {
   }
 
   p a {
-    color: $linkTextColor;
+    color: $link-text-color;
     background-color: transparent;
 
     &:hover {
       text-decoration: underline;
-      color: $linkHoverColor;
+      color: $link-hover-color;
     }
   }
 
@@ -451,7 +451,7 @@ article.content .article-entry {
   .featured-image {
     margin: 0 0 16px 0;
     height: 20em;
-    border-radius: $articleBoxCornerRadius $articleBoxCornerRadius 0 0;
+    border-radius: $neu-corner-radius $neu-corner-radius 0 0;
 
     &::before {
       background-size: contain;
@@ -469,10 +469,10 @@ article.content .article-entry {
     margin: 1.5em 0 0.5em 0;
     padding: 1em 1em;
     border-radius: 0;
-    color: $firstColor;
-    background: $textBackgroundColor2;
-    box-shadow: inset 0px 6px 3px $boxShadowColor,
-                inset 0px -6px 3px $boxShadowHighlightColor;
+    color: $first-color;
+    background: $text-bg-color2;
+    box-shadow: inset 0px 6px 3px $shadow-color,
+                inset 0px -6px 3px $shadow-highlight-color;
     @include smaller {
       padding: 0.75em 0.5em;
     }
@@ -482,7 +482,7 @@ article.content .article-entry {
     margin: 1em 0.5em;
     padding: 0.5em 1em;
     border-radius: 1rlh;
-    color: $firstColor;
+    color: $first-color;
     @include neu-simple;
     @include smaller {
       margin: 3px;
@@ -491,7 +491,7 @@ article.content .article-entry {
 
   h4 {
     display: flex;
-    color: $firstColor2;
+    color: $first-color2;
     padding: 0.4em 0.5em;
     margin: 0 1.5em 0.5em 1em;
     @include smaller {
@@ -511,7 +511,7 @@ article.content .article-entry {
   }
 
   h5, h6 {
-    color: $firstColor2;
+    color: $first-color2;
     margin-left: 2em;
   }
 
@@ -531,16 +531,16 @@ article.content .article-entry {
 
 /* for short codes */
 article.content .article-entry figure.figure {
-  background: $textBackgroundColor2;
+  background: $text-bg-color2;
   max-width: unquote('min(800px, 80%)');
   padding: 24px 32px 12px;
   margin: 2rem auto;
   font-weight: 400;
   border-radius: 16px;
-  box-shadow: inset 4px 4px 8px $boxShadowColor,
-              inset -4px -4px 8px $boxShadowHighlightColor,
-              4px 4px 8px $boxShadowColor,
-              -4px -4px 8px $boxShadowHighlightColor;
+  box-shadow: inset 4px 4px 8px $shadow-color,
+              inset -4px -4px 8px $shadow-highlight-color,
+              4px 4px 8px $shadow-color,
+              -4px -4px 8px $shadow-highlight-color;
   @include smaller {
     padding: 1em;
     width: 95%;
@@ -616,8 +616,8 @@ article.content .article-entry figure.figure {
 .article-continue {
   margin: auto;
   padding: 0.2em 2em;
-  border-radius: $buttonCornerRadius;
-  color: $linkTextColor;
+  border-radius: $button-radius;
+  color: $link-text-color;
   font-size: 110%;
   font-weight: 700;
   display: flex;
@@ -660,7 +660,7 @@ ul {
 
       &.active {
         color: #FCF7F9;
-        background-color: $firstColor;
+        background-color: $first-color;
         font-weight: bold;
         height: 100%;
       }
@@ -695,7 +695,7 @@ ul {
 
 
 pre {
-  background-color: $textBackgroundColor;
+  background-color: $text-bg-color;
 }
 
 
@@ -713,14 +713,14 @@ pre {
 
   .toc-link{
     &:before {
-      background-color: $secondColor3;
+      background-color: $second-color3;
       width: 4px;
     }
     &.is-active-link {
       font-weight: 700;
 
       &:before {
-        background-color: $firstColor;
+        background-color: $first-color;
       }
     }
   }
@@ -729,13 +729,13 @@ pre {
   }
 }
 
-.xToc {
-  background-color: $textBackgroundColor;
+.x-toc {
+  background-color: $text-bg-color;
   width: auto;
   margin: auto auto 3em 5%;
   padding: 1em 2em;
   line-height: 100%;
-  .xToc_title{
+  .x-toc-title{
     font-weight: 700;
     font-size: 125%;
   }
@@ -749,16 +749,16 @@ pre {
   }
 }
 
-.article-entry .xToc {
-  border-left: solid 3px $firstColor2;
+.article-entry .x-toc {
+  border-left: solid 3px $first-color2;
 }
 
 /* side widget */
 aside {
   border-radius: 10px;
-  background: $textBackgroundColor;
-  box-shadow: inset 4px 4px 4px  $boxShadowColor,
-              inset -4px -4px 6px $boxShadowHighlightColor;
+  background: $text-bg-color;
+  box-shadow: inset 4px 4px 4px  $shadow-color,
+              inset -4px -4px 6px $shadow-highlight-color;
   margin: 1em 0.5em 2em;
   padding: 1em 1em;
   font-size: 1rem;
@@ -779,7 +779,7 @@ aside {
     }
   }
 
-  &.widget-resent-posts {
+  &.widget-recent-posts {
     li {
       display: grid;
       grid-template-columns: 4em auto;
@@ -790,9 +790,9 @@ aside {
         grid-column: 1;
         height: 3em;
         width: 100%;
-        border-radius: $articleBoxCornerRadius $articleBoxCornerRadius 0 0;
+        border-radius: $neu-corner-radius $neu-corner-radius 0 0;
       }
-      .widget-resent-posts-title {
+      .widget-recent-posts-title {
         grid-row: 1;
         grid-column: 2;
       }
@@ -809,10 +809,10 @@ aside {
         height: 2em; // the same with bulma
         padding: 0 0.5em; // override bulma
         border-radius: 3px;
-        background-color: $textBackgroundColor;
-        box-shadow: 2px 2px 4px $boxShadowColor,
-                    -2px -2px 6px $boxShadowHighlightColor,
-                    inset 0px 0px 4px $boxShadowEnlightColor;
+        background-color: $text-bg-color;
+        box-shadow: 2px 2px 4px $shadow-color,
+                    -2px -2px 6px $shadow-highlight-color,
+                    inset 0px 0px 4px $shadow-enlight-color;
         &:hover  {
           @include neu-hover;
         }
@@ -859,7 +859,7 @@ ul#share-button {
     list-style-type: none;
     border-radius: 4px;
     @include neu-simple(2px, 4px);
-    border: 2px solid $boxShadowHighlightColor;
+    border: 2px solid $shadow-highlight-color;
 
     &.twitter {
       background-color: #1da1f2;
