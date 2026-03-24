@@ -27,27 +27,27 @@
   <div class="article-footer">
     <ul id="share-button">
       <li class="share-button twitter">
-        <a class="" href="http://twitter.com/intent/tweet?text={{ .Scratch.Get "page-title" }}&url={{ .Permalink }}" target="_blank" title="Twitter で共有">
+        <a class="" href="https://x.com/intent/tweet?text={{ .Scratch.Get "page-title" | urlquery }}&url={{ .Permalink | urlquery }}" target="_blank" title="Twitter で共有">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
       <li class="share-button facebook">
-        <a class="" href="http://www.facebook.com/sharer.php?u={{ .Permalink }}&t={{ .Scratch.Get "page-title" }}" target="_blank" title="facebookで共有">
+        <a class="" href="https://www.facebook.com/sharer.php?u={{ .Permalink | urlquery }}&t={{ .Scratch.Get "page-title" | urlquery }}" target="_blank" title="facebookで共有">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
       <li class="share-button hatena">
-        <a class="" href="http://b.hatena.ne.jp/add?mode=confirm&url={{ .Permalink }}&title={{ .Scratch.Get "page-title" }}" target="_blank" data-hatena-bookmark-title="{{ .Permalink }}" title="">
+        <a class="" href="https://b.hatena.ne.jp/add?mode=confirm&url={{ .Permalink | urlquery }}&title={{ .Scratch.Get "page-title" | urlquery }}" target="_blank" data-hatena-bookmark-title="{{ .Permalink }}" title="">
           <div>B!</div>
         </a>
       </li>
       <li class="share-button pocket">
-        <a class="" href="http://getpocket.com/edit?url={{ .Permalink }}" target="_blank" title="pocketで共有">
+        <a class="" href="https://getpocket.com/edit?url={{ .Permalink | urlquery }}" target="_blank" title="pocketで共有">
           <i class="fab fa-get-pocket"></i>
         </a>
       </li>
       <li class="share-button line">
-        <a class="" href="http://line.naver.jp/R/msg/text/?{{ .Scratch.Get "page-title" | urlize}}&url={{ .Permalink }}" target="_blank" title="LINEで送る">
+        <a class="" href="https://line.naver.jp/R/msg/text/?{{ .Scratch.Get "page-title" | urlquery }}&url={{ .Permalink | urlquery }}" target="_blank" title="LINEで送る">
           <i class="fab fa-line"></i>
         </a>
       </li>
