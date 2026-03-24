@@ -56,7 +56,7 @@ nav {
 .footer {
   box-shadow: inset 0px 4px 4px  $shadow-color,
              inset 0px -4px 4px $shadow-highlight-color;
-  background: linear-gradient(rgba($background-color, 0.4), rgba($background-color, 1));
+  background: linear-gradient(color-mix(in srgb, $background-color 40%, transparent), $background-color);
   padding: 3rem 1.5rem 4rem 1.5rem;
   margin-top: auto;
 }

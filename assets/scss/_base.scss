@@ -31,7 +31,7 @@ strong {
 em {
   font-style: italic;
   color: $first-color3;
-  text-decoration:underline dashed rgba($first-color2, 0.5) 0.125em;
+  text-decoration: underline dashed color-mix(in srgb, $first-color2 50%, transparent) 0.125em;
   text-decoration-skip-ink: auto;
   text-underline-offset: 0.25em;
 }
