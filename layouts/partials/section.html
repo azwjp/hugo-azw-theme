@@ -1,5 +1,5 @@
 
-<article class="content" id="{{ .Params.layout }}-{{ .Params.slug }}" class="article article-type-{{ .Params.layout }}" itemscope itemtype="https://schema.org/BlogPosting">
+<article class="content article{{ with .Params.layout }} article-type-{{ . }}{{ end }}"{{ with .Params.layout }}{{ with $.Params.slug }} id="{{ $.Params.layout }}-{{ . }}"{{ end }}{{ end }} itemscope itemtype="https://schema.org/BlogPosting">
   <hgroup class="article-header">
     {{- if or (.Permalink) (.Title)}}
       {{- partial "post/title.html" . }}
