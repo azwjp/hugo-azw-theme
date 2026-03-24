@@ -5,8 +5,8 @@
   <div class="widget-body">
     <ul>
       {{- range first 5 (where .Site.RegularPages "Section" "in" $mainSections) }}
-      <a href="{{- .Permalink }}">
-        <li>
+      <li>
+        <a href="{{- .Permalink }}">
             {{- if .Params.featured_image -}}
               {{- if $src:= $.Page.Resources.GetMatch .Params.featured_image }}
                 {{- $preview := $src.Resize $.Site.Params.site.image_size_preview }}
@@ -25,8 +25,8 @@
                 <time datetime="{{ .Date }}" itemprop="datePublished">{{- .Date.Format (.Site.Params.dateFormat | default "2006-01-02") }}</time>
               </span>
             </p>
-        </li>
-      </a>
+        </a>
+      </li>
       {{- end }}
     </ul>
   </div>
