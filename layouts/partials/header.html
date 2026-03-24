@@ -3,10 +3,10 @@
 <nav id="header-navigation" class="header-navigation" role="navigation">
   <ul>
     {{- range .Site.Menus.main -}}
-      <li>
+      <li{{ if .Params.iconOnly }} class="icon-only"{{ end }}>
         <a href="{{- .URL | safeURL }}" title="{{- .Title }}"{{ with .Params.target }} target="{{ . }}" rel="noopener noreferrer"{{ end }}>
-          {{- with .Params.icon }}<i class="{{ . }} fa-lg"></i> {{ end -}}
-          {{- .Name -}}
+          {{- with .Params.icon }}<i class="{{ . }} fa-lg"></i>{{ end -}}
+          {{- if not .Params.iconOnly }} {{ .Name }}{{ end -}}
         </a>
       </li>
     {{- end}}

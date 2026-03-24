@@ -10,6 +10,20 @@ nav {
         border-radius: $button-radius;
         @include neu-raised($blur: $button-blur);
 
+        &.icon-only {
+          padding: 0;
+          width: 2.4em;
+          height: 2.4em;
+          border-radius: 50%;
+          a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+          }
+        }
+
         &:hover {
           box-shadow: $neu-radius $neu-radius $button-blur $shadow-color,
                       (-$neu-radius) (-$neu-radius) $button-blur $shadow-highlight-color,
