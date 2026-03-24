@@ -136,6 +136,36 @@ $wide: 1216px;
   }
 }
 
+// Neumorphism shadow mixins
+@mixin neu-raised($radius: $articleBoxCornerShadowRadius, $blur: $articleBoxCornerShadowBlur) {
+  box-shadow: $radius $radius $blur $boxShadowColor,
+              (-$radius) (-$radius) $blur $boxShadowHighlightColor,
+              inset 0px 0px $articleBoxCornerAccentBlur $boxShadowEnlightColor;
+}
+
+@mixin neu-simple($radius: 3px, $blur: 4px) {
+  box-shadow: $radius $radius $blur $boxShadowColor,
+              (-$radius) (-$radius) $blur $boxShadowHighlightColor;
+}
+
+@mixin neu-hover {
+  box-shadow: 2px 2px 4px $boxShadowColor,
+              -2px -2px 6px $boxShadowHighlightColor,
+              inset 7px 7px 15px $boxShadowColor,
+              inset -7px -7px 20px $boxShadowHighlightColor,
+              0px 0px 4px $boxShadowEnlightColor !important;
+}
+
+@mixin neu-pressed($radius: 4px, $blur: 4px) {
+  box-shadow: inset $radius $radius $blur $boxShadowColor,
+              inset (-$radius) (-$radius) $blur $boxShadowHighlightColor;
+}
+
+@mixin neu-groove {
+  box-shadow: 2px 2px 2px $boxShadowColor inset,
+              -2px -2px 2px $boxShadowHighlightColor inset;
+}
+
 /* global settings */
 body {
   display: flex;
@@ -184,9 +214,7 @@ nav {
         margin: 20px 1em;
         padding: 0.1em 2em;
         border-radius: $buttonCornerRadius;
-        box-shadow: $articleBoxCornerShadowRadius $articleBoxCornerShadowRadius $buttonCornerBlur $boxShadowColor,
-                    (-$articleBoxCornerShadowRadius) (-$articleBoxCornerShadowRadius) $buttonCornerBlur $boxShadowHighlightColor,
-                    inset 0px 0px $articleBoxCornerAccentBlur $boxShadowEnlightColor;
+        @include neu-raised($blur: $buttonCornerBlur);
         
         &:hover {
           box-shadow: $articleBoxCornerShadowRadius $articleBoxCornerShadowRadius $buttonCornerBlur $boxShadowColor,
@@ -247,9 +275,7 @@ nav {
   padding: 1em;
   border-radius: $articleBoxCornerRadius;
   background-color: $textBackgroundColor;
-  box-shadow: $articleBoxCornerShadowRadius $articleBoxCornerShadowRadius $articleBoxCornerShadowBlur $boxShadowColor,
-              (-$articleBoxCornerShadowRadius) (-$articleBoxCornerShadowRadius) $articleBoxCornerShadowBlur $boxShadowHighlightColor,
-              inset 0px 0px $articleBoxCornerAccentBlur $boxShadowEnlightColor;
+  @include neu-raised;
 
   .article-summary {
 
@@ -259,10 +285,9 @@ nav {
       border-radius: 2px;
       line-height: 1;
       opacity: 100;
-      box-shadow: 2px 2px 2px  $boxShadowColor inset,
-                  -2px -2px 2px $boxShadowHighlightColor inset;
+      @include neu-groove;
     }
-    
+
     .article-header {
       h1 {
         font-size: 1.73em;
@@ -385,8 +410,7 @@ article {
       font-size: 1.75em;
       font-weight: 400;
       border-radius: 32px;
-      box-shadow: 6px 6px 9px $boxShadowColor,
-                  -6px -6px 9px $boxShadowHighlightColor;
+      @include neu-simple(6px, 9px);
       padding: .5em 1em;
     }
 
@@ -395,9 +419,7 @@ article {
       line-height: 1.75;
       border-radius: $articleBoxCornerRadius;
       background-color: $textBackgroundColor;
-      box-shadow: $articleBoxCornerShadowRadius $articleBoxCornerShadowRadius $articleBoxCornerShadowBlur $boxShadowColor,
-                  (-$articleBoxCornerShadowRadius) (-$articleBoxCornerShadowRadius) $articleBoxCornerShadowBlur $boxShadowHighlightColor,
-                  inset 0px 0px $articleBoxCornerAccentBlur $boxShadowEnlightColor;
+      @include neu-raised;
       
       &>* {
         margin-right: 2.5em;
@@ -468,8 +490,7 @@ article {
         padding: 0.5em 1em;
         border-radius: 1rlh;
         color: $firstColor;
-        box-shadow: 3px 3px 4px $boxShadowColor,
-                    -3px -3px 4px $boxShadowHighlightColor;
+        @include neu-simple;
         @include smaller {
           margin: 3px;
         }
@@ -491,8 +512,7 @@ article {
           border-radius: 2px;
           line-height: 1;
           opacity: 100;
-          box-shadow: 2px 2px 2px  $boxShadowColor inset,
-                      -2px -2px 2px $boxShadowHighlightColor inset;
+          @include neu-groove;
         }
       }
 
@@ -546,8 +566,7 @@ article {
           padding: 0.5em 1em;
           font-size: 80%;
           font-weight: 400;
-          box-shadow: inset 2px 2px 5px  $boxShadowColor,
-                      inset -2px -2px 5px $boxShadowHighlightColor;
+          @include neu-pressed(2px, 5px);
         }
       }
     }
@@ -610,15 +629,10 @@ article {
   display: flex;
   justify-content: center;
   width: max-content;
-  box-shadow: 3px 3px 4px  $boxShadowColor,
-             -3px -3px 4px $boxShadowHighlightColor;
+  @include neu-simple;
 
   &:hover {
-  box-shadow: 2px 2px 4px $boxShadowColor,
-              -2px -2px 6px $boxShadowHighlightColor,
-              inset 7px 7px 15px $boxShadowColor,
-              inset -7px -7px 20px $boxShadowHighlightColor,
-              0px 0px 4px $boxShadowEnlightColor !important;
+    @include neu-hover;
   }
 }
 
@@ -658,15 +672,10 @@ ul {
       }
 
       &:not(.active) {
-        box-shadow: 3px 3px 4px  $boxShadowColor,
-                   -3px -3px 4px $boxShadowHighlightColor;
+        @include neu-simple;
 
         &:hover {
-          box-shadow: 2px 2px 4px $boxShadowColor,
-                      -2px -2px 6px $boxShadowHighlightColor,
-                      inset 7px 7px 15px $boxShadowColor,
-                      inset -7px -7px 20px $boxShadowHighlightColor,
-                      0px 0px 4px $boxShadowEnlightColor !important;
+          @include neu-hover;
         }
       }
 
@@ -801,11 +810,7 @@ aside {
                     -2px -2px 6px $boxShadowHighlightColor,
                     inset 0px 0px 4px $boxShadowEnlightColor;
         &:hover  {
-          box-shadow: 2px 2px 4px $boxShadowColor,
-                      -2px -2px 6px $boxShadowHighlightColor,
-                      inset 7px 7px 15px $boxShadowColor,
-                      inset -7px -7px 20px $boxShadowHighlightColor,
-                      0px 0px 4px $boxShadowEnlightColor !important;
+          @include neu-hover;
         }
       }
     }
@@ -862,8 +867,7 @@ ul#share-button {
     margin: 0px 2% 0px 0px;
     list-style-type: none;
     border-radius: 4px;
-    box-shadow: 2px 2px 4px  $boxShadowColor,
-                -2px -2px 4px $boxShadowHighlightColor;
+    @include neu-simple(2px, 4px);
     border: 2px solid $boxShadowHighlightColor;
 
     &.twitter {
