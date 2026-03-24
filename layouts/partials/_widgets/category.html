@@ -14,11 +14,12 @@
   {{ $scratch := .Page.Scratch }}
   {{ $scope := newScratch }}
   {{/* Collect categories to show in this scope */}}
+  {{ $parent := $scratch.Get "parent" }}
   {{ range $name, $taxonomy := .Site.Taxonomies.categories }}
-    {{ $conditionForRoot := (and (eq ($scratch.Get "parentCategory") nil) (not (isset ($scratch.Get "parent") $name)))}}
+    {{ $conditionForRoot := (and (eq ($scratch.Get "parentCategory") nil) (or (eq $parent nil) (not (isset $parent $name))))}}
     {{ $conditionForChild := false }}
-    {{ if (and (ne ($scratch.Get "parentCategory") nil) (isset ($scratch.Get "parent") $name) )}}{{/* nil check */}}
-      {{ $conditionForChild = (eq ($scratch.Get "parentCategory") (index ($scratch.Get "parent") $name))}}
+    {{ if (and (ne ($scratch.Get "parentCategory") nil) (ne $parent nil) (isset $parent $name)) }}
+      {{ $conditionForChild = (eq ($scratch.Get "parentCategory") (index $parent $name))}}
     {{ end }}
     {{if or $conditionForRoot $conditionForChild}}
       {{$scope.Add "toShow" (slice $name)}}
