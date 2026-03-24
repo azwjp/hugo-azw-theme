@@ -1,0 +1,56 @@
+$sp: 768px;
+$wide: 1216px;
+
+@mixin smaller { // <768px
+  @media (max-width: ($sp)) {
+    @content;
+  }
+}
+
+@mixin middle { // 768px–1216px
+  @media (min-width: ($sp)) and (max-width: ($wide)) {
+    @content;
+  }
+}
+
+@mixin wide { // ≥1216px
+  @media (min-width: ($wide)) {
+    @content;
+  }
+}
+
+@mixin larger { // ≥768px
+  @media (min-width: ($sp)) {
+    @content;
+  }
+}
+
+// Neumorphism shadow mixins
+@mixin neu-raised($radius: $neu-radius, $blur: $neu-blur) {
+  box-shadow: $radius $radius $blur $shadow-color,
+              (-$radius) (-$radius) $blur $shadow-highlight-color,
+              inset 0px 0px $neu-accent-blur $shadow-enlight-color;
+}
+
+@mixin neu-simple($radius: 3px, $blur: 4px) {
+  box-shadow: $radius $radius $blur $shadow-color,
+              (-$radius) (-$radius) $blur $shadow-highlight-color;
+}
+
+@mixin neu-hover {
+  box-shadow: 2px 2px 4px $shadow-color,
+              -2px -2px 6px $shadow-highlight-color,
+              inset 7px 7px 15px $shadow-color,
+              inset -7px -7px 20px $shadow-highlight-color,
+              0px 0px 4px $shadow-enlight-color;
+}
+
+@mixin neu-pressed($radius: 4px, $blur: 4px) {
+  box-shadow: inset $radius $radius $blur $shadow-color,
+              inset (-$radius) (-$radius) $blur $shadow-highlight-color;
+}
+
+@mixin neu-groove {
+  box-shadow: 2px 2px 2px $shadow-color inset,
+              -2px -2px 2px $shadow-highlight-color inset;
+}

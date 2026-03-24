@@ -1,0 +1,41 @@
+/* global settings */
+body {
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+  background: $background-color;
+  background-attachment: fixed;
+  color: $text-color;
+  font-weight: 300;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+a {
+  color: $link-color;
+  border: 0;
+  line-height: 32px;
+  padding: 0;
+
+  &:hover {
+    color: $link-hover-color;
+    background-color: transparent;
+  }
+}
+
+strong {
+    color: $strong-text-color;
+}
+
+em {
+  font-style: italic;
+  color: $first-color3;
+  text-decoration:underline dashed rgba($first-color2, 0.5) 0.125em;
+  text-decoration-skip-ink: auto;
+  text-underline-offset: 0.25em;
+}
+
+pre {
+  background-color: $text-bg-color;
+}

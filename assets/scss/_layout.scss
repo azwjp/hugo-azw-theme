@@ -1,0 +1,66 @@
+nav {
+  &.header-navigation {
+    margin-bottom: 1rem;
+    ul {
+      text-align: center;
+      li {
+        display: inline-block;
+        margin: 20px 1em;
+        padding: 0.1em 2em;
+        border-radius: $button-radius;
+        @include neu-raised($blur: $button-blur);
+
+        &:hover {
+          box-shadow: $neu-radius $neu-radius $button-blur $shadow-color,
+                      (-$neu-radius) (-$neu-radius) $button-blur $shadow-highlight-color,
+                      inset $neu-radius $neu-radius $button-blur $shadow-color,
+                      inset (-$neu-radius) (-$neu-radius) $button-blur $shadow-highlight-color,
+                      0px 0px $neu-accent-blur $shadow-enlight-color;
+        }
+      }
+    }
+  }
+
+  &.footer-navigation ul {
+    justify-content: space-around;
+    text-align: center;
+  }
+}
+
+.text-muted {
+  color: var(--text-muted-color);
+}
+
+.site-title {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.header-image {
+  width: 100%;
+  text-align: center;
+  margin: auto auto 3rem;
+
+  img {
+    max-height: 300px;
+    width: 100%;
+    height: auto;
+    vertical-align: middle;
+    margin: auto;
+    object-fit: cover;
+  }
+}
+
+.footer {
+  box-shadow: inset 0px 4px 4px  $shadow-color,
+             inset 0px -4px 4px $shadow-highlight-color;
+  background: linear-gradient(rgba($background-color, 0.4), rgba($background-color, 1));
+  padding: 3rem 1.5rem 4rem 1.5rem;
+  margin-top: auto;
+}
+
+.content h1 {
+  color: $first-color;
+}

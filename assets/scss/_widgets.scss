@@ -1,0 +1,134 @@
+.toc {
+  font-weight: 300;
+  padding: 32px;
+
+  &.is-position-fixed {
+    width: 18%;
+  }
+
+  ol {
+    margin: auto;
+  }
+
+  .toc-link{
+    &:before {
+      background-color: $second-color3;
+      width: 4px;
+    }
+    &.is-active-link {
+      font-weight: 700;
+
+      &:before {
+        background-color: $first-color;
+      }
+    }
+  }
+  .node-name--H3 {
+    font-size: 85%;
+  }
+}
+
+.x-toc {
+  background-color: $text-bg-color;
+  width: auto;
+  margin: auto auto 3em 5%;
+  padding: 1em 2em;
+  line-height: 100%;
+  .x-toc-title{
+    font-weight: 700;
+    font-size: 125%;
+  }
+  li a {
+    line-height: 125%;
+    font-size: 85%;
+    font-weight: 300;
+  }
+  figure.wp-block-image {
+    margin: 0px;
+  }
+}
+
+.article-entry .x-toc {
+  border-left: solid 3px $first-color2;
+}
+
+/* side widget */
+aside {
+  border-radius: 10px;
+  background: $text-bg-color;
+  box-shadow: inset 4px 4px 4px  $shadow-color,
+              inset -4px -4px 6px $shadow-highlight-color;
+  margin: 1em 0.5em 2em;
+  padding: 1em 1em;
+  font-size: 1rem;
+  font-weight: 400;
+
+  li * {
+    line-height: 1.5;
+    font-size: 85%;
+  }
+  .widget-title {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  &.widget-category {
+    ul {
+      margin-left: 1em;
+    }
+  }
+
+  &.widget-recent-posts {
+    li {
+      display: grid;
+      grid-template-columns: 4em auto;
+      column-gap: 0.5em;
+      margin: 0 0 16px 0;
+      .featured-image {
+        grid-row: 1;
+        grid-column: 1;
+        height: 3em;
+        width: 100%;
+        border-radius: $neu-corner-radius $neu-corner-radius 0 0;
+      }
+      .widget-recent-posts-title {
+        grid-row: 1;
+        grid-column: 2;
+      }
+    }
+  }
+
+  &.list-tags {
+    li {
+      display: inline-block;
+      margin-right: 8px;
+      margin-bottom: 8px;
+
+      .tag {
+        height: 2em; // the same with bulma
+        padding: 0 0.5em; // override bulma
+        border-radius: 3px;
+        background-color: $text-bg-color;
+        box-shadow: 2px 2px 4px $shadow-color,
+                    -2px -2px 6px $shadow-highlight-color,
+                    inset 0px 0px 4px $shadow-enlight-color;
+        &:hover  {
+          @include neu-hover;
+        }
+      }
+    }
+  }
+}
+
+.list-count, .list-date {
+  padding-left: 5px;
+  color: var(--text-muted-color);
+  font-size: 75%;
+  font-weight: 300;
+  &:before {
+    content: "(";
+  }
+  &:after {
+    content: ")";
+  }
+}
