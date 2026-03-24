@@ -102,35 +102,28 @@ $articleBoxCornerRadius: 16px;
 $buttonCornerRadius: 16px;
 $buttonCornerBlur: 14px;
 
-// mobile is not used for now
 $sp: 768px;
-$pc: 1024px;
 $wide: 1216px;
 
-@mixin smaller { // smaller
+@mixin smaller { // <768px
   @media (max-width: ($sp)) {
     @content;
   }
 }
-/*
-@mixin tablet { // mobile, tablet
-  @media (max-width: ($pc)) {
-    @content;
-  }
-}
-*/
 
-@mixin middle { // tablet
-  @media (((min-width: ($sp)) and (max-width: ($wide)))) {
+@mixin middle { // 768px–1216px
+  @media (min-width: ($sp)) and (max-width: ($wide)) {
     @content;
   }
 }
-@mixin wide { // tablet
+
+@mixin wide { // ≥1216px
   @media (min-width: ($wide)) {
     @content;
   }
 }
-@mixin larger { // tablet, desktop
+
+@mixin larger { // ≥768px
   @media (min-width: ($sp)) {
     @content;
   }
@@ -153,7 +146,7 @@ $wide: 1216px;
               -2px -2px 6px $boxShadowHighlightColor,
               inset 7px 7px 15px $boxShadowColor,
               inset -7px -7px 20px $boxShadowHighlightColor,
-              0px 0px 4px $boxShadowEnlightColor !important;
+              0px 0px 4px $boxShadowEnlightColor;
 }
 
 @mixin neu-pressed($radius: 4px, $blur: 4px) {
@@ -221,13 +214,14 @@ nav {
                       (-$articleBoxCornerShadowRadius) (-$articleBoxCornerShadowRadius) $buttonCornerBlur $boxShadowHighlightColor,
                       inset $articleBoxCornerShadowRadius $articleBoxCornerShadowRadius $buttonCornerBlur $boxShadowColor,
                       inset (-$articleBoxCornerShadowRadius) (-$articleBoxCornerShadowRadius) $buttonCornerBlur $boxShadowHighlightColor,
-                      0px 0px $articleBoxCornerAccentBlur $boxShadowEnlightColor !important;
+                      0px 0px $articleBoxCornerAccentBlur $boxShadowEnlightColor;
         }
       }
     }
   }
 
-  &.footer-navigation ul {justify-content: space-around;
+  &.footer-navigation ul {
+    justify-content: space-around;
     text-align: center;
   }
 }
@@ -270,120 +264,118 @@ nav {
   color: $firstColor;
 }
 
-/* articles summary*/
-.article-list{
+/* articles summary */
+.article-list {
   padding: 1em;
   border-radius: $articleBoxCornerRadius;
   background-color: $textBackgroundColor;
   @include neu-raised;
+}
 
-  .article-summary {
+.article-list .article-summary {
+  &:not(:last-child):after {
+    content: "";
+    height: 4px;
+    border-radius: 2px;
+    line-height: 1;
+    opacity: 100;
+    @include neu-groove;
+  }
 
-    &:not(:last-child):after{
-      content: "";
-      height: 4px;
+  .article-header h1 {
+    font-size: 1.73em;
+    font-weight: 600;
+  }
+
+  .article-meta {
+    padding: 0;
+    vertical-align: bottom;
+    background-color: inherit;
+    font-size: 80%;
+  }
+
+  .article-meta-item {
+    margin-right: 1em;
+  }
+
+  @include smaller {
+    padding: 0 8px;
+
+    &:not(:last-child):after {
+      margin: 2em 1em 2em 1em;
+      display: block;
+    }
+
+    .featured-image {
+      margin: 0 0 16px 0;
+      height: 16em;
+      border-radius: $articleBoxCornerRadius $articleBoxCornerRadius 0 0;
+
+      &::before {
+        background-size: contain;
+      }
+    }
+
+    .article-meta {
+      margin-top: 0.5em;
+      text-align: left;
+    }
+  }
+
+  @include larger {
+    margin: 0;
+    padding: 0 16px;
+    display: grid;
+    grid-template-columns: 160px auto;
+    grid-template-rows: auto 1fr auto;
+    column-gap: 1em;
+    row-gap: 1em;
+    overflow: clip;
+    min-height: 160px;
+    width: 100%;
+
+    &:not(:last-child):after {
+      grid-column: 1/4;
+      flex-grow: 1;
+      margin: 1em 1em 2em 1em;
       border-radius: 2px;
       line-height: 1;
       opacity: 100;
-      @include neu-groove;
     }
 
     .article-header {
-      h1 {
-        font-size: 1.73em;
-        font-weight: 600;
-      }
-    }
-
-    .article-meta{
-      padding: 0;
-      vertical-align: bottom;
+      grid-row: 1;
+      grid-column: 2;
+      z-index: 2;
       background-color: inherit;
-      font-size: 80%;
-      .article-meta-item{
-        margin-right: 1em;
+    }
+
+    .featured-image {
+      grid-row: 1 / 4;
+      grid-column: 1;
+      width: 160px;
+      height: 160px;
+
+      &::before {
+        max-height: 160px;
+        max-width: 160px;
       }
     }
-    @include smaller{
-      padding: 0 8px;
 
-      &:not(:last-child):after{
-        margin: 2em 1em 2em 1em;
-        display: block;
-      }
-
-      .featured-image {
-        margin: 0 0 16px 0;
-        height: 16em;
-        border-radius: $articleBoxCornerRadius $articleBoxCornerRadius 0 0;
-        &::before{
-          background-size: contain;
-        }
-      }
-      .article-meta{
-        margin-top: 0.5em;
-        text-align: left;
-      }
+    .article-entry {
+      grid-row: 2;
+      grid-column: 2;
+      font-size: smaller;
+      z-index: 2;
+      background-color: inherit;
     }
-    
-    @include larger {
-      margin: 0;
-      padding: 0 16px;
 
-      display: grid;
-      grid-template-columns: 160px auto;
-      grid-template-rows: auto 1fr auto;
-      column-gap: 1em;
-      row-gap: 1em;
-      overflow: clip;
-      min-height: 160px;
-      width: 100%;
-
-      &:not(:last-child):after{
-        grid-column: 1/4;
-        flex-grow: 1;
-        margin: 1em 1em 2em 1em;
-        border-radius: 2px;
-        line-height: 1;
-        opacity: 100;
-      }
-      
-      .article-header{
-        z-index: 2;
-        background-color: inherit;
-      }
-      
-      .featured-image {
-        grid-row: 1 / 4;
-        grid-column: 1;
-        width: 160px;
-        height: 160px;
-        &::before{
-          max-height: 160px;
-          max-width: 160px;
-        }
-      }
-
-      .article-header{
-        grid-row: 1;
-        grid-column: 2;
-        z-index: 2;
-        background-color: inherit;
-      }
-      .article-entry{
-        grid-row: 2;
-        grid-column: 2;
-        font-size: smaller;
-        z-index: 2;
-        background-color: inherit;
-      }
-      .article-meta{
-        grid-row: 3;
-        grid-column: 2;
-        padding: 0;
-        z-index: 2;
-        text-align: left;
-      }
+    .article-meta {
+      grid-row: 3;
+      grid-column: 2;
+      padding: 0;
+      z-index: 2;
+      text-align: left;
     }
   }
 }
@@ -402,173 +394,175 @@ article {
     margin: 2em 0;
     padding: 0.5rem 0;
   }
-    
-  &.content{
-    h1 {
-      background: $textBackgroundColor;
-      margin-bottom: 1.5em;
-      font-size: 1.75em;
-      font-weight: 400;
-      border-radius: 32px;
-      @include neu-simple(6px, 9px);
-      padding: .5em 1em;
+}
+
+article.content h1 {
+  background: $textBackgroundColor;
+  margin-bottom: 1.5em;
+  font-size: 1.75em;
+  font-weight: 400;
+  border-radius: 32px;
+  @include neu-simple(6px, 9px);
+  padding: .5em 1em;
+}
+
+article.content .article-entry {
+  padding-bottom: 2em;
+  line-height: 1.75;
+  border-radius: $articleBoxCornerRadius;
+  background-color: $textBackgroundColor;
+  @include neu-raised;
+
+  & > * {
+    margin-right: 2.5em;
+    margin-left: 3em;
+    @include smaller {
+      margin-right: 1em;
+      margin-left: 1em;
+    }
+  }
+
+  & > p {
+    margin-top: 1em;
+    margin-bottom: 1.5em;
+  }
+
+  p a {
+    color: $linkTextColor;
+    background-color: transparent;
+
+    &:hover {
+      text-decoration: underline;
+      color: $linkHoverColor;
+    }
+  }
+
+  table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    @include smaller {
+      width: calc(100% - 2em);
+      margin-right: 1em;
+      margin-left: 1em;
+    }
+  }
+
+  .featured-image {
+    margin: 0 0 16px 0;
+    height: 20em;
+    border-radius: $articleBoxCornerRadius $articleBoxCornerRadius 0 0;
+
+    &::before {
+      background-size: contain;
+    }
+  }
+
+  ul {
+    margin-left: 5em;
+    @include smaller {
+      margin-left: 3em;
+    }
+  }
+
+  h2 {
+    margin: 1.5em 0 0.5em 0;
+    padding: 1em 1em;
+    border-radius: 0;
+    color: $firstColor;
+    background: $textBackgroundColor2;
+    box-shadow: inset 0px 6px 3px $boxShadowColor,
+                inset 0px -6px 3px $boxShadowHighlightColor;
+    @include smaller {
+      padding: 0.75em 0.5em;
+    }
+  }
+
+  h3 {
+    margin: 1em 0.5em;
+    padding: 0.5em 1em;
+    border-radius: 1rlh;
+    color: $firstColor;
+    @include neu-simple;
+    @include smaller {
+      margin: 3px;
+    }
+  }
+
+  h4 {
+    display: flex;
+    color: $firstColor2;
+    padding: 0.4em 0.5em;
+    margin: 0 1.5em 0.5em 1em;
+    @include smaller {
+      margin: 0 0.5em 0.5em 0.5em;
     }
 
-    .article-entry{
-      padding-bottom: 2em;
-      line-height: 1.75;
-      border-radius: $articleBoxCornerRadius;
-      background-color: $textBackgroundColor;
-      @include neu-raised;
-      
-      &>* {
-        margin-right: 2.5em;
-        margin-left: 3em;
-        @include smaller {
-          margin-right: 1em;
-          margin-left: 1em;
-        }
-      }
-      
-      &>p {
-        margin-top: 1em;
-        margin-bottom: 1.5em;
-      }
-      p {
-        a {
-          color: $linkTextColor !important;
-          background-color: transparent;
-    
-          &:hover {
-            text-decoration: underline;
-            color: $linkHoverColor;
-          }
-        }
-      }
-      table {
-        margin-left: auto;
-        margin-right: auto;
-        width: 90%;
-        @include smaller {
-          width: calc(100% - 2em);
-          margin-right: 1em;
-          margin-left: 1em;
-        }
-      }
-      
-      .featured-image {
-        margin: 0 0 16px 0;
-        height: 20em;
-        border-radius: $articleBoxCornerRadius $articleBoxCornerRadius 0 0;
-        &::before{
-          background-size: contain;
-        }
-      }
+    &:after {
+      content: "";
+      flex-grow: 1;
+      margin: auto -0.5em auto 1em;
+      height: 4px;
+      border-radius: 2px;
+      line-height: 1;
+      opacity: 100;
+      @include neu-groove;
+    }
+  }
 
-      ul {
-        margin-left: 5em;
-        @include smaller {
-          margin-left: 3em;
-        }
-      }
+  h5, h6 {
+    color: $firstColor2;
+    margin-left: 2em;
+  }
 
-      h2 {
-        margin: 1.5em 0 0.5em 0;
-        padding: 1em 1em;
-        border-radius: 0;
-        color: $firstColor;
-        background: $textBackgroundColor2;
-        box-shadow: inset 0px 6px 3px  $boxShadowColor,
-                    inset 0px -6px 3px $boxShadowHighlightColor;
-        @include smaller {
-          padding: 0.75em 0.5em;
-        }
-      }
+  .article-meta {
+    margin: 1em 1em;
+  }
 
-      h3 {
-        margin: 1em 0.5em;
-        padding: 0.5em 1em;
-        border-radius: 1rlh;
-        color: $firstColor;
-        @include neu-simple;
-        @include smaller {
-          margin: 3px;
-        }
-      }
+  .article-meta .article-meta-item {
+    margin-right: 1em;
+    border-radius: 14px;
+    padding: 0.5em 1em;
+    font-size: 80%;
+    font-weight: 400;
+    @include neu-pressed(2px, 5px);
+  }
+}
 
-      h4 {
-        display: flex;
-        color: $firstColor2;
-        padding: 0.4em 0.5em;
-        margin: 0 1.5em 0.5em 1em;
-        @include smaller {
-          margin: 0 0.5em 0.5em 0.5em;
-        }
-        &:after{
-          content: "";
-          flex-grow: 1;
-          margin: auto -0.5em auto 1em;
-          height: 4px;
-          border-radius: 2px;
-          line-height: 1;
-          opacity: 100;
-          @include neu-groove;
-        }
-      }
+/* for short codes */
+article.content .article-entry figure.figure {
+  background: $textBackgroundColor2;
+  max-width: unquote('min(800px, 80%)');
+  padding: 24px 32px 12px;
+  margin: 2rem auto;
+  font-weight: 400;
+  border-radius: 16px;
+  box-shadow: inset 4px 4px 8px $boxShadowColor,
+              inset -4px -4px 8px $boxShadowHighlightColor,
+              4px 4px 8px $boxShadowColor,
+              -4px -4px 8px $boxShadowHighlightColor;
+  @include smaller {
+    padding: 1em;
+    width: 95%;
+  }
 
-      h5, h6 {
-        color: $firstColor2;
-        margin-left: 2em;
-      }
-      .article-meta {
-        margin: 1em 1em;
-      }
-      /* for short codes */
-      figure.figure {
-        background: $textBackgroundColor2;
-        max-width: unquote('min(800px, 80%)');
-        padding: 24px 32px 12px;
-        margin: 2rem auto;
-        font-weight: 400;
-        border-radius: 16px;
-        box-shadow: inset 4px 4px 8px  $boxShadowColor,
-                    inset -4px -4px 8px $boxShadowHighlightColor,
-                    4px 4px 8px  $boxShadowColor,
-                    -4px -4px 8px $boxShadowHighlightColor
-                    ;
-        @include smaller {
-          padding: 1em;
-          width: 95%;
-        }
-        img {
-            max-height: 600px;
-            width: 100%;
-            margin: auto;
-            box-sizing: content-box;
-            object-fit: contain;
-            @include smaller {
-              max-height: 480px;
-            }
-        }
-        p {
-          &:not(:last-child) {
-            margin-bottom: 4px;
-          }
-          &.caption {
-            font-size: 0.85em;
-          }
-        }
-      }
-      .article-meta{
-        .article-meta-item{
-          margin-right: 1em;
-          border-radius: 14px;
-          padding: 0.5em 1em;
-          font-size: 80%;
-          font-weight: 400;
-          @include neu-pressed(2px, 5px);
-        }
-      }
+  img {
+    max-height: 600px;
+    width: 100%;
+    margin: auto;
+    box-sizing: content-box;
+    object-fit: contain;
+    @include smaller {
+      max-height: 480px;
+    }
+  }
+
+  p {
+    &:not(:last-child) {
+      margin-bottom: 4px;
+    }
+    &.caption {
+      font-size: 0.85em;
     }
   }
 }
@@ -707,6 +701,16 @@ pre {
 
 .toc {
   font-weight: 300;
+  padding: 32px;
+
+  &.is-position-fixed {
+    width: 18%;
+  }
+
+  ol {
+    margin: auto;
+  }
+
   .toc-link{
     &:before {
       background-color: $secondColor3;
@@ -714,13 +718,13 @@ pre {
     }
     &.is-active-link {
       font-weight: 700;
-  
+
       &:before {
         background-color: $firstColor;
       }
     }
   }
-  .node-name--H3  {
+  .node-name--H3 {
     font-size: 85%;
   }
 }
@@ -829,19 +833,6 @@ aside {
     content: ")";
   }
 }
-
-.toc {
-  padding: 32px;
-
-  &.is-position-fixed {
-    width: 18%;
-  }
-
-  ol {
-    margin: auto;
-  }
-}
-
 
 
 /* for share button */
