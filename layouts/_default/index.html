@@ -1,7 +1,7 @@
 {{- define "header"}}
   {{- with $.Site.Params.site.header}}
     <div class="header-image">
-    <img src="{{ . }}">
+    <img src="{{ . }}" alt="{{ $.Site.Title }}">
     </div>
   {{- end}}
 {{- end}}
