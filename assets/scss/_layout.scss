@@ -25,11 +25,18 @@ nav {
         }
 
         &:hover {
+          // Hover-only pink glow (DESIGN.md §4 header nav / §3.3 pink = interaction).
+          // Not counted against the §3.5 always-on glow budget.
           box-shadow: $neu-radius $neu-radius $button-blur $shadow-color,
                       (-$neu-radius) (-$neu-radius) $button-blur $shadow-highlight-color,
                       inset $neu-radius $neu-radius $button-blur $shadow-color,
                       inset (-$neu-radius) (-$neu-radius) $button-blur $shadow-highlight-color,
-                      0px 0px $neu-accent-blur $shadow-enlight-color;
+                      0px 0px $neu-accent-blur $shadow-enlight-color,
+                      0 0 16px $glow-pink;
+
+          a {
+            color: $accent-primary-text;
+          }
         }
       }
     }

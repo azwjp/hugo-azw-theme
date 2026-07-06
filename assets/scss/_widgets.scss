@@ -70,11 +70,20 @@ aside {
   .widget-title {
     font-weight: 700;
     margin-bottom: 0.5rem;
+    // DESIGN.md §3.3: green = label/structure accent (accent-secondary-text).
+    color: $second-color2;
   }
 
   &.widget-category {
     ul {
       margin-left: 1em;
+    }
+
+    // DESIGN.md §3.3: category = structure, not interaction — green label color only.
+    // No border/glow here (unlike .tag): keeps §3.5's always-on-glow budget at 3
+    // (tags + divider + pagination), and the tree-indented list isn't pill-shaped.
+    .list-item > a {
+      color: $second-color2;
     }
   }
 
@@ -109,9 +118,14 @@ aside {
         padding: 0 0.5em; // override bulma
         border-radius: 3px;
         background-color: $text-bg-color;
+        // DESIGN.md §4: tags get a thin pink border (explicitly permitted, unlike
+        // general-purpose borders banned by §5-4) + pink text + a weak always-on glow.
+        border: 1px solid $first-color;
+        color: $accent-primary-text;
         box-shadow: 2px 2px 4px $shadow-color,
                     -2px -2px 6px $shadow-highlight-color,
-                    inset 0px 0px 4px $shadow-enlight-color;
+                    inset 0px 0px 4px $shadow-enlight-color,
+                    0 0 8px $glow-pink;
         &:hover  {
           @include neu-hover;
         }

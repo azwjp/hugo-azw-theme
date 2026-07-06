@@ -9,11 +9,14 @@
 .article-list .article-summary {
   &:not(:last-child):after {
     content: "";
-    height: 4px;
+    height: 2px;
     border-radius: 2px;
     line-height: 1;
     opacity: 100;
-    @include neu-groove;
+    // DESIGN.md §3.3: pink->green gradient is one of the two sanctioned "both colors
+    // at once" signature uses. Dark adds a glow via --divider-glow (none in light).
+    background: linear-gradient(90deg, $first-color, $second-color);
+    box-shadow: $divider-glow;
   }
 
   .article-header h1 {
