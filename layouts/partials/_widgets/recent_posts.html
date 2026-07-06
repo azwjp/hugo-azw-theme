@@ -5,26 +5,12 @@
   <div class="widget-body">
     <ul>
       {{- range first 5 (where .Site.RegularPages "Section" "in" $mainSections) }}
-      <li>
+      <li class="list-item">
         <a href="{{- .Permalink }}">
-            {{- if .Params.featured_image -}}
-              {{- if $src:= $.Page.Resources.GetMatch .Params.featured_image }}
-                {{- $preview := $src.Resize $.Site.Params.site.image_size_preview }}
-                <p class="featured-image" style="background-image: url({{ $preview.RelPermalink }});"></p>
-              {{- else }}
-                <p class="featured-image" style="background-image: url({{ .Params.featured_image }});"></p>
-              {{- end }}
-            {{- else if .Params.images }}
-              {{- with index .Params.images 0 }}
-                <p class="featured-image" style="background-image: url({{ . }});"></p>
-              {{ end -}}
-            {{ end -}}
-            <p class="widget-recent-posts-title">
-              {{ .Title }}
-              <span class="list-date">
-                <time datetime="{{ .Date }}" itemprop="datePublished">{{- .Date.Format (.Site.Params.dateFormat | default "2006-01-02") }}</time>
-              </span>
-            </p>
+          <span class="widget-recent-posts-title">{{ .Title }}</span>
+          <span class="list-date">
+            <time datetime="{{ .Date }}" itemprop="datePublished">{{- .Date.Format (.Site.Params.dateFormat | default "2006-01-02") }}</time>
+          </span>
         </a>
       </li>
       {{- end }}

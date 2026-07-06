@@ -69,3 +69,24 @@ $wide: 1216px;
   text-shadow: (-$offset) 0 0 var(--split-pink),
                $offset 0 0 var(--split-green);
 }
+
+// Mock A "flat neu" panel: background sits at page-background level (true
+// neumorphism — no lighter tint panel), shadow gives it lift. Used for article
+// cards and sidebar widgets. $inset-accent adds the card-only faint inner rim
+// (mock A .na-card's "inset 0 0 4px rgba(255,255,255,.03)"; widgets omit it).
+@mixin neu-card($radius: 8px, $blur: 18px, $inset-accent: false) {
+  @if $inset-accent {
+    box-shadow: $radius $radius $blur $shadow-color,
+                (-$radius) (-$radius) $blur $shadow-highlight-color,
+                inset 0 0 4px rgba(255, 255, 255, 0.03);
+  } @else {
+    box-shadow: $radius $radius $blur $shadow-color,
+                (-$radius) (-$radius) $blur $shadow-highlight-color;
+  }
+}
+
+// Mock A "well" — sunken list-item row used inside sidebar widgets.
+@mixin neu-well($radius: 3px, $blur: 6px) {
+  box-shadow: inset $radius $radius $blur $shadow-color,
+              inset (-$radius) (-$radius) $blur $shadow-highlight-color;
+}

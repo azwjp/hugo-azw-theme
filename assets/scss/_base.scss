@@ -42,3 +42,12 @@ em {
 pre {
   background-color: $text-bg-color;
 }
+
+// Mock A footer note: motion is decorative only (hover glows/splits), never
+// load-bearing, so it can be switched off wholesale.
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

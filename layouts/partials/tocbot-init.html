@@ -1,14 +1,21 @@
 <script>
-tocbot.init({
-  // Where to render the table of contents.
-  tocSelector: '.js-toc',
-  // Where to grab the headings to build the table of contents.
-  contentSelector: '.js-toc-content',
-  // Which headings to grab inside of the contentSelector element.
-  headingSelector: 'h1, h2, h3',
-  // For headings inside relative or absolute positioned containers within content.
-  scrollSmooth: true,
-  positionFixedSelector: '.toc',
-  fixedSidebarOffset: 'auto',
+// tocbot itself loads via <script defer src="...tocbot.min.js"> (head.html).
+// This inline script is NOT deferred, so without waiting for
+// DOMContentLoaded it can (and did, per the tocbot-is-not-defined PAGEERROR)
+// run before the deferred library has executed. DOMContentLoaded always
+// fires after all deferred scripts have run, so it's a safe ordering point.
+document.addEventListener('DOMContentLoaded', function () {
+  tocbot.init({
+    // Where to render the table of contents.
+    tocSelector: '.js-toc',
+    // Where to grab the headings to build the table of contents.
+    contentSelector: '.js-toc-content',
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: 'h1, h2, h3',
+    // For headings inside relative or absolute positioned containers within content.
+    scrollSmooth: true,
+    positionFixedSelector: '.toc',
+    fixedSidebarOffset: 'auto',
+  });
 });
 </script>

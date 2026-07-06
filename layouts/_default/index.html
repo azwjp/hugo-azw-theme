@@ -1,28 +1,17 @@
-{{- define "header"}}
-  {{- with $.Site.Params.site.header}}
-    <div class="header-image">
-    <img src="{{ . }}" alt="{{ $.Site.Title }}">
-    </div>
-  {{- end}}
-{{- end}}
-
 {{- define "main"}}
-  <main id="content" class="content column
-        is-offset-2-widescreen is-8-widescreen
-        is-offset-0-desktop is-9-desktop
-        is-offset-0-tablet is-12-tablet" role="main">
-        {{ $mainSections := .Site.Params.mainSections | default (slice "post") }}
-        <div class="article-list">
-          {{ range (.Paginate (where .Site.RegularPages "Section" "in" $mainSections) .Site.Params.site.listSize).Pages }}
-            {{- partial "summary.html" . }}
-          {{- end -}}
-        </div>
-        {{- partial "pagination.html" . }}
-  </main>
-  <div class="column
-        is-2-widescreen
-        is-offset-0-desktop is-3-desktop
-        is-offset-0-tablet is-12-tablet">
-    {{- partial "sidebar.html" . -}}
+  <div class="page-cols">
+    <main id="content" class="content main-col" role="main">
+      <div class="section-title">{{ T "widget_recent_posts" }}</div>
+      {{ $mainSections := .Site.Params.mainSections | default (slice "post") }}
+      <div class="article-list">
+        {{ range (.Paginate (where .Site.RegularPages "Section" "in" $mainSections) .Site.Params.site.listSize).Pages }}
+          {{- partial "summary.html" . }}
+        {{- end -}}
+      </div>
+      {{- partial "pagination.html" . }}
+    </main>
+    <aside class="side-col">
+      {{- partial "sidebar.html" . -}}
+    </aside>
   </div>
 {{- end }}

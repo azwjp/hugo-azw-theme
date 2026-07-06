@@ -1,0 +1,16 @@
+{{/*
+  Shared category/tag pill renderer (mock A .na-tags: categories = green pill,
+  tags = pink pill — DESIGN.md §3.3). Used by post/article-meta.html (full
+  article page) and summary.html (article card). Caller wraps the output in a
+  `.tag-pills` container.
+*/}}
+{{- with .Params.categories }}
+  {{- range . }}
+    <li><a class="pill pill-green" href="{{ "categories" | relLangURL }}/{{ . | urlize }}/">{{ . }}</a></li>
+  {{- end }}
+{{- end }}
+{{- with .Params.tags }}
+  {{- range . }}
+    <li><a class="pill pill-pink" href="{{ "tags" | relLangURL }}/{{ . | urlize }}/">{{ . }}</a></li>
+  {{- end }}
+{{- end }}

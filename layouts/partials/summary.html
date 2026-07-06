@@ -15,19 +15,31 @@
 
   <a class="featured-image" href="{{- .RelPermalink }}" style="background-image: url({{ $imageURL }});"></a>
 
-  {{- if or (.Permalink) (.Title) }}
-    <hgroup class="article-header">
-      {{- partial "post/title.html" . }}
-    </hgroup>
-  {{- end }}
-
-  <div class="article-entry text-muted" itemprop="description">
-    {{- if .Description }}
-        {{- .Description -}}
-    {{ else if .Summary }}
-        {{ .Summary | plainify }}{{ if .Truncated }}...{{ end }}
+  <div class="article-body">
+    {{- if .Date }}
+      <div class="meta-date">
+        <a href="{{- .Permalink }}">
+          <time datetime="{{ .Date }}" itemprop="datePublished">{{- .Date.Format (.Site.Params.dateFormat | default "2006-01-02") }}</time>
+        </a>
+      </div>
     {{- end }}
-  </div>
 
-  {{- partial "post/article-meta.html" . }}
+    {{- if or (.Permalink) (.Title) }}
+      <hgroup class="article-header">
+        {{- partial "post/title.html" . }}
+      </hgroup>
+    {{- end }}
+
+    <div class="article-entry text-muted" itemprop="description">
+      {{- if .Description }}
+          {{- .Description -}}
+      {{ else if .Summary }}
+          {{ .Summary | plainify }}{{ if .Truncated }}...{{ end }}
+      {{- end }}
+    </div>
+
+    <ul class="tag-pills">
+      {{- partial "post/tags.html" . -}}
+    </ul>
+  </div>
 </article>

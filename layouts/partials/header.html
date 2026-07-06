@@ -1,14 +1,27 @@
-<p class="site-title">{{.Site.Title}}</p>
+{{- $title := .Site.Title -}}
+{{- $parts := split $title " " -}}
+{{- $brand := index $parts 0 -}}
+{{- $sub := "AZW.JP" -}}
+{{- if gt (len $parts) 1 -}}
+  {{- $sub = delimit (after 1 $parts) " " | upper -}}
+{{- end -}}
 
-<nav id="header-navigation" class="header-navigation" role="navigation">
-  <ul>
-    {{- range .Site.Menus.main -}}
-      <li{{ if .Params.iconOnly }} class="icon-only"{{ end }}>
-        <a href="{{- .URL | safeURL }}" title="{{- .Title }}"{{ with .Params.target }} target="{{ . }}" rel="noopener noreferrer"{{ end }}>
-          {{- with .Params.icon }}<i class="{{ . }} fa-lg"></i>{{ end -}}
-          {{- if not .Params.iconOnly }} {{ .Name }}{{ end -}}
-        </a>
-      </li>
-    {{- end}}
-  </ul>
-</nav>
+<header class="site-header">
+  <div class="site-brand">
+    <p class="site-title">{{ $brand }}</p>
+    <small class="site-subtitle">{{ $sub }}</small>
+  </div>
+
+  <nav id="header-navigation" class="header-navigation" role="navigation">
+    <ul>
+      {{- range .Site.Menus.main -}}
+        <li{{ if .Params.iconOnly }} class="icon-only"{{ end }}>
+          <a href="{{- .URL | safeURL }}" title="{{- .Title }}"{{ with .Params.target }} target="{{ . }}" rel="noopener noreferrer"{{ end }}>
+            {{- with .Params.icon }}<i class="{{ . }} fa-lg"></i>{{ end -}}
+            {{- if not .Params.iconOnly }} {{ .Name }}{{ end -}}
+          </a>
+        </li>
+      {{- end}}
+    </ul>
+  </nav>
+</header>

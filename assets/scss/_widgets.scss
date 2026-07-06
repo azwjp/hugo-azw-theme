@@ -3,7 +3,11 @@
   padding: 32px;
 
   &.is-position-fixed {
-    width: 18%;
+    // Fixed px, not a %: the TOC now lives in a fixed-width 200px grid track
+    // (.toc-col, see _layout.scss .page-cols.has-toc) rather than a viewport-relative
+    // Bulma column, so it needs an absolute width once tocbot switches it to
+    // position: fixed and takes it out of grid flow.
+    width: 200px;
   }
 
   ol {
@@ -52,97 +56,114 @@
   border-left: solid 3px $first-color2;
 }
 
-/* side widget */
-aside {
-  border-radius: 10px;
-  background: $text-bg-color;
-  box-shadow: inset 4px 4px 4px  $shadow-color,
-              inset -4px -4px 6px $shadow-highlight-color;
-  margin: 1em 0.5em 2em;
-  padding: 1em 1em;
+/* side widget — mock A .na-widget: neu card, page-background level, same
+   language as the article card (§4 of the migration brief). */
+aside.widget {
+  border-radius: $neu-corner-radius;
+  background: $background-color;
+  @include neu-card(8px, 18px);
+  margin: 0 0 22px;
+  padding: 20px 22px;
   font-size: 1rem;
   font-weight: 400;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 
   li * {
     line-height: 1.5;
     font-size: 85%;
   }
+
   .widget-title {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
     font-weight: 700;
-    margin-bottom: 0.5rem;
+    margin: 0 0 14px;
     // DESIGN.md §3.3: green = label/structure accent (accent-secondary-text).
     color: $second-color2;
+    // Mock A §4: widget heading glow is dark-only — one of the §3.5 budget's 3 slots.
+    text-shadow: $widget-title-glow;
+  }
+
+  .widget-body ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  // Mock A widget list item: sunken "well" row, shared by every widget that
+  // lists rows (category tree, recent posts). Layout (row vs. stack) is added
+  // per widget type below; the well shape itself lives here once.
+  .list-item {
+    padding: 9px 14px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    @include neu-well(3px, 6px);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   &.widget-category {
-    ul {
-      margin-left: 1em;
+    // name left, count right.
+    .list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      > a {
+        color: $text-color;
+      }
     }
 
-    // DESIGN.md §3.3: category = structure, not interaction — green label color only.
-    // No border/glow here (unlike .tag): keeps §3.5's always-on-glow budget at 3
-    // (tags + divider + pagination), and the tree-indented list isn't pill-shaped.
-    .list-item > a {
-      color: $second-color2;
+    ul ul {
+      margin-left: 0.75em;
     }
   }
 
   &.widget-recent-posts {
-    li {
-      display: grid;
-      grid-template-columns: 4em auto;
-      column-gap: 0.5em;
-      margin: 0 0 16px 0;
-      .featured-image {
-        grid-row: 1;
-        grid-column: 1;
-        height: 3em;
-        width: 100%;
-        border-radius: $neu-corner-radius $neu-corner-radius 0 0;
-      }
-      .widget-recent-posts-title {
-        grid-row: 1;
-        grid-column: 2;
-      }
+    // No thumbnail (240px sidebar is too narrow for a `4em auto` image+title
+    // grid — Japanese titles wrapped one character per line). Title (clamped
+    // to 2 lines) stacked above a monospace date instead, mock A's "well" list
+    // language rather than the old featured-image layout.
+    .list-item a {
+      display: block;
+      color: inherit;
+    }
+
+    .widget-recent-posts-title {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      overflow-wrap: anywhere;
+      font-size: 13px;
+      line-height: 1.5;
+      color: $text-color;
+    }
+
+    .list-date {
+      display: block;
+      margin-top: 6px;
     }
   }
 
-  &.list-tags {
-    li {
-      display: inline-block;
-      margin-right: 8px;
-      margin-bottom: 8px;
-
-      .tag {
-        height: 2em; // the same with bulma
-        padding: 0 0.5em; // override bulma
-        border-radius: 3px;
-        background-color: $text-bg-color;
-        // DESIGN.md §4: tags get a thin pink border (explicitly permitted, unlike
-        // general-purpose borders banned by §5-4) + pink text + a weak always-on glow.
-        border: 1px solid $first-color;
-        color: $accent-primary-text;
-        box-shadow: 2px 2px 4px $shadow-color,
-                    -2px -2px 6px $shadow-highlight-color,
-                    inset 0px 0px 4px $shadow-enlight-color,
-                    0 0 8px $glow-pink;
-        &:hover  {
-          @include neu-hover;
-        }
-      }
+  &.widget-tags .widget-body {
+    // Reuses the shared .tag-pills / .pill component (article cards, DESIGN.md §4).
+    .list-count {
+      margin-left: 6px;
     }
   }
 }
 
 .list-count, .list-date {
-  padding-left: 5px;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
   color: var(--text-muted-color);
-  font-size: 75%;
-  font-weight: 300;
-  &:before {
-    content: "(";
-  }
-  &:after {
-    content: ")";
-  }
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
 }

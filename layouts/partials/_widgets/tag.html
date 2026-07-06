@@ -1,11 +1,11 @@
-<aside class="widget list-tags">
+<aside class="widget widget-tags">
   <h3 class="widget-title"> {{ T "widget_tags" }}</h3>
   <div class="widget-body">
-    <ul>
+    <ul class="tag-pills">
       {{ range $name, $taxonomy := $.Site.Taxonomies.tags }}
       {{ with $.Site.GetPage (printf "/tags/%s" $name) }}
-      <li class="list-item">
-          <a class="tag" href="{{ .Permalink }}">
+      <li>
+          <a class="pill pill-pink" href="{{ .Permalink }}">
             {{ $name }}
             <span class="list-count">{{ $taxonomy.Count}}</span>
           </a>

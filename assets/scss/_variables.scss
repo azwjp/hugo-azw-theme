@@ -3,44 +3,57 @@ $light-first-color: hsl(337, 68%, 62%);
 $light-first-color2: hsl(337, 50%, 50%);
 $light-first-color3: hsl(337, 21%, 36%);
 $light-second-color: #16D977; // accent-secondary-ui (light) — hue migrated 83 -> 148
-$light-second-color2: #007C4B; // accent-secondary-text (light) — hue migrated 83 -> 148
+$light-second-color2: #007C4B; // accent-secondary-text (light) — mock A "green" value
 $light-second-color3: hsl(148, 35%, 62%); // hue migrated 83 -> 148, saturation/lightness kept
-// accent-primary-text (DESIGN.md §2.2): pink text tone, distinct from $light-first-color
-// (which serves as the UI/border/glow tone). Needed for AA contrast on body text/links.
+// accent-primary-text (DESIGN.md §2.2 / mock A "pink"): pink text tone, distinct from
+// $light-first-color (which serves as the UI/border/glow tone). Needed for AA contrast
+// on body text/links.
 $light-accent-primary-text: #BF386E;
-// Phase 3 (DESIGN.md §5-3): light background lowered 98% -> 95% for more neumorphic contrast
-// against the white highlight shadow (DESIGN-BOOTSTRAP.md §5.1 — decided 2026-07-06 after
-// comparing 98/96/95% screenshots; 95% approved).
-$light-background-color: hsl(337, 20%, 95%);
+// Mock A §1 (adopted 2026-07 verbatim from the approved design mock, superseding the
+// earlier hsl(337,20%,95%) / adjust-color()-derived values below): light background,
+// exactly the mock's --na-bg. This is the core "案A" change — the neumorphic shadow
+// pair (lo/hi below) is now pink-tinted instead of neutral.
+$light-background-color: #F5EEF1;
 $light-text-background-color: scale-color($light-background-color, $lightness: 80%);
 $light-text-background-color2: rgb(249, 239, 246);
 // Phase 3 (DESIGN.md §5-3): migrated off the legacy cyan (hue 194) onto accent-primary-text.
 $light-link-hover-color: $light-accent-primary-text;
 $light-link-color: #666;
 $light-link-text-color: $light-accent-primary-text;
-$light-text-muted-color: #6F6F6F;
-$light-text-color: #4a4a4a; // Bulma's default text color
+// Mock A: --na-ink / neumorphic shadow pair (lo/hi), taken verbatim. --na-mut
+// itself (#86787E) only hits 3.68:1 against --na-bg, short of WCAG AA's 4.5:1
+// for the small excerpt/date text it's used on (DESIGN.md §1.5 "可読性最優先"
+// overrides mock fidelity here) — darkened along the same hue to 5.15:1.
+$light-text-muted-color: #6E6167;
+$light-text-color: #4A4A4A;
+$light-title-color: #453A40; // mock A --na-title: card/brand headline ink (distinct from body ink)
+$light-box-shadow-color: rgba(168, 112, 138, 0.30); // mock A --na-lo (pink-tinted, not neutral)
+$light-box-shadow-highlight-color: rgba(255, 255, 255, 0.95); // mock A --na-hi
 
-// Calculate dark mode colors using SCSS functions
+// Dark mode colors — Mock A "dark = amplifier" set, taken verbatim (DESIGN.md §1.4:
+// same structure/tokens as light, only the values amplify).
 $dark-first-color: adjust-color($light-first-color, $lightness: 10%, $saturation: -8%);
 $dark-first-color2: adjust-color($light-first-color2, $lightness: 5%, $saturation: -5%);
 $dark-first-color3: adjust-color($light-first-color3, $lightness: -14%, $saturation: 9%);
 // adjust-color() on the new hue-148 base drifts far from the brand dark green (#1AEA7C):
 // computed $dark-second-color ~= #14844C, $dark-second-color2 ~= #02603B. Both are pinned
-// directly to the brand value instead (DESIGN.md §2.2 accent-secondary-ui/text dark = #1AEA7C).
+// directly to the brand value instead (mock A "green" dark = #1AEA7C).
 $dark-second-color: #1AEA7C;
 $dark-second-color2: #1AEA7C;
 $dark-second-color3: adjust-color($light-second-color3, $lightness: -12%, $saturation: 5%);
-$dark-accent-primary-text: #F077B0; // DESIGN.md §2.2 accent-primary-text dark
-$dark-background-color: hsl(220, 15%, 15%); // Completely different hue for better dark mode
+$dark-accent-primary-text: #EA5C99; // mock A "pink" dark (was #F077B0 pre-mock-A)
+$dark-background-color: #20242E; // mock A --na-bg dark
 $dark-text-background-color: adjust-color($dark-background-color, $lightness: 5%);
 $dark-text-background-color2: adjust-color($dark-background-color, $lightness: 3%);
 // Phase 3: both pinned to accent-primary-text dark (no longer derived from the cyan light value).
 $dark-link-hover-color: $dark-accent-primary-text;
 $dark-link-color: adjust-color($light-link-color, $lightness: 14%, $saturation: 0%);
 $dark-link-text-color: $dark-accent-primary-text;
-$dark-text-muted-color: adjust-color($light-text-muted-color, $lightness: 30%);
-$dark-text-color: adjust-color($light-text-color, $lightness: 50%);
+$dark-text-muted-color: #8B90A0; // mock A --na-mut dark
+$dark-text-color: #D9DCE4; // mock A --na-ink dark
+$dark-title-color: #F2F3F7; // mock A --na-title dark
+$dark-box-shadow-color: rgba(9, 11, 16, 0.6); // mock A --na-lo dark
+$dark-box-shadow-highlight-color: rgba(255, 255, 255, 0.05); // mock A --na-hi dark
 
 // Define CSS custom properties for colors in :root
 :root {
@@ -59,19 +72,25 @@ $dark-text-color: adjust-color($light-text-color, $lightness: 50%);
   --link-text-color: #{$light-link-text-color};
   --strong-text-color: var(--second-color2);
   --accent-primary-text: #{$light-accent-primary-text};
+  --title-color: #{$light-title-color};
   // Chromatic split / glow tokens (DESIGN.md §2.3). Kept as one block so a future
   // :root[data-theme="dark"] override can redefine this whole set at once.
   --glow-pink: rgba(220, 79, 136, 0.22);
   --glow-green: rgba(22, 217, 119, 0.22);
   --split-pink: rgba(220, 79, 136, 0.55);
   --split-green: rgba(13, 176, 103, 0.50);
-  // Phase 3 (DESIGN.md §4 pagination / §3.3 divider): implementation tokens so the
-  // light/dark presence-vs-absence difference lives in _variables.scss (§3.4), not
-  // as a media query duplicated in _components.scss / _article.scss.
+  // Phase 3 (DESIGN.md §4 pagination): dark-only glow, so the light/dark
+  // presence-vs-absence difference lives in _variables.scss (§3.4), not as a media
+  // query duplicated in _components.scss.
   --pagination-active-glow: none;
-  --divider-glow: none;
-  --box-shadow-color: #{rgba(adjust-color($light-first-color, $lightness: -18%, $saturation: -43%), 0.15)};
-  --box-shadow-highlight-color: rgba(255, 255, 255, 1);
+  // Mock A §3 tag/pill glow: light is a single soft halo; dark adds an inner rim too
+  // (structural presence difference, not just alpha — same pattern as the token above).
+  --pill-glow-pink: 0 0 8px var(--glow-pink);
+  --pill-glow-green: 0 0 8px var(--glow-green);
+  // Mock A §4 widget heading: glow is dark-only ("light では控えめ or なし").
+  --widget-title-glow: none;
+  --box-shadow-color: #{$light-box-shadow-color};
+  --box-shadow-highlight-color: #{$light-box-shadow-highlight-color};
   --box-shadow-enlight-color: rgba(255, 255, 255, 0.2);
   --text-muted-color: #{$light-text-muted-color};
   --text-color: #{$light-text-color};
@@ -94,16 +113,19 @@ $dark-text-color: adjust-color($light-text-color, $lightness: 50%);
     --link-color: #{$dark-link-color};
     --link-text-color: #{$dark-link-text-color};
     --accent-primary-text: #{$dark-accent-primary-text};
+    --title-color: #{$dark-title-color};
     // Chromatic split / glow tokens (DESIGN.md §2.3) — dark set, same block shape as light.
     --glow-pink: rgba(234, 92, 153, 0.40);
     --glow-green: rgba(26, 234, 124, 0.35);
     --split-pink: rgba(234, 92, 153, 0.75);
     --split-green: rgba(26, 234, 124, 0.65);
-    // Dark = amplified (DESIGN.md §1.4): these two turn "on" only here.
+    // Dark = amplified (DESIGN.md §1.4): these turn "on" / grow an extra layer only here.
     --pagination-active-glow: 0 0 16px var(--glow-pink);
-    --divider-glow: 0 0 10px var(--glow-pink), 0 0 10px var(--glow-green);
-    --box-shadow-color: #{rgba(adjust-color($dark-background-color, $lightness: -5%), 0.5)};
-    --box-shadow-highlight-color: #{rgba(adjust-color($dark-background-color, $lightness: 15%), 0.5)};
+    --pill-glow-pink: 0 0 10px var(--glow-pink), inset 0 0 6px var(--glow-pink);
+    --pill-glow-green: 0 0 10px var(--glow-green), inset 0 0 6px var(--glow-green);
+    --widget-title-glow: 0 0 12px var(--glow-green);
+    --box-shadow-color: #{$dark-box-shadow-color};
+    --box-shadow-highlight-color: #{$dark-box-shadow-highlight-color};
     --box-shadow-enlight-color: #{rgba(adjust-color($dark-background-color, $lightness: 15%), 0.2)};
     --text-muted-color: #{$dark-text-muted-color};
     --text-color: #{$dark-text-color};
@@ -125,12 +147,15 @@ $link-color: var(--link-color);
 $link-text-color: var(--link-text-color);
 $strong-text-color: var(--strong-text-color);
 $accent-primary-text: var(--accent-primary-text);
+$title-color: var(--title-color);
 $glow-pink: var(--glow-pink);
 $glow-green: var(--glow-green);
 $split-pink: var(--split-pink);
 $split-green: var(--split-green);
 $pagination-active-glow: var(--pagination-active-glow);
-$divider-glow: var(--divider-glow);
+$pill-glow-pink: var(--pill-glow-pink);
+$pill-glow-green: var(--pill-glow-green);
+$widget-title-glow: var(--widget-title-glow);
 $shadow-color: var(--box-shadow-color);
 $shadow-highlight-color: var(--box-shadow-highlight-color);
 $shadow-enlight-color: var(--box-shadow-enlight-color);

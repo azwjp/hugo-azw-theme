@@ -1,3 +1,65 @@
+// Mock A .na-tag / .na-tag.na-g: pill-shaped category/tag chips shared by article
+// cards (post/tags.html) and the sidebar tag widget. Pink = tags (interaction,
+// DESIGN.md §3.3); green = categories (structure).
+// Bulma's `.content ul { list-style: disc; margin-left: 2em; }` (specificity
+// 0-1-1) otherwise beats a bare `.tag-pills` (0-1-0) since .tag-pills always
+// lives inside a `.content` ancestor (main#content or article.content) —
+// qualify with it so the bullet/indent reset actually wins.
+.content .tag-pills,
+.tag-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    margin: 0;
+    list-style: none;
+
+    &::marker {
+      content: "";
+    }
+  }
+}
+
+// Mock A .na-date: monospace, muted date stamp shared by the article card and
+// the full article page header (migration brief §5: "同じ言語に揃える").
+.meta-date {
+  display: inline-block;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--text-muted-color);
+
+  a {
+    color: inherit;
+    line-height: inherit;
+  }
+}
+
+.pill {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  padding: 4px 13px;
+  border-radius: 999px;
+  line-height: 1.6;
+
+  &.pill-pink {
+    color: $accent-primary-text;
+    border: 1px solid $split-pink;
+    box-shadow: $pill-glow-pink;
+  }
+
+  &.pill-green {
+    color: $second-color2;
+    border: 1px solid $split-green;
+    box-shadow: $pill-glow-green;
+  }
+}
+
 .featured-image {
   display: flex;
   position: relative;

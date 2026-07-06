@@ -1,32 +1,115 @@
+// Mock A .na-header: page-width wrapper shared by the header and the two/three
+// column body below it, so the brand+nav row lines up with the content edges.
+.page-wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 32px;
+
+  @include smaller {
+    padding: 0 16px;
+  }
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 28px;
+  margin-bottom: 34px;
+}
+
+.site-brand {
+  .site-title {
+    margin: 0;
+    text-align: left;
+    font-size: 27px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: $title-color;
+    @include chromatic-split(2.5px);
+  }
+
+  .site-subtitle {
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    color: var(--text-muted-color);
+    text-shadow: none;
+    margin-top: 2px;
+  }
+}
+
+// Two/three column body grid (mock A .na-cols): main + 240px sidebar, plus an
+// optional wide-only TOC rail on single-post pages.
+.page-cols {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: 30px;
+  align-items: start;
+
+  &.has-toc {
+    @include wide {
+      grid-template-columns: 200px 1fr 240px;
+    }
+  }
+
+  @media (max-width: 860px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.toc-col {
+  display: none;
+
+  @include wide {
+    display: block;
+  }
+}
+
+.side-col {
+  min-width: 0;
+}
+
 nav {
   &.header-navigation {
-    margin-bottom: 1rem;
     ul {
-      text-align: center;
+      display: flex;
+      align-items: center;
+      gap: 14px;
       li {
-        display: inline-block;
-        margin: 20px 1em;
-        padding: 0.1em 2em;
         border-radius: $button-radius;
         @include neu-raised($blur: $button-blur);
 
         &.icon-only {
+          width: 42px;
+          height: 42px;
           padding: 0;
-          width: 2.4em;
-          height: 2.4em;
           border-radius: 50%;
+          box-shadow: 5px 5px 12px $shadow-color, -5px -5px 12px $shadow-highlight-color;
+          color: var(--text-muted-color);
+          transition: box-shadow 0.25s, color 0.25s;
+
           a {
             display: flex;
             align-items: center;
             justify-content: center;
             width: 100%;
             height: 100%;
+            color: inherit;
+          }
+
+          &:hover {
+            // Hover-only pink glow (DESIGN.md §4 header nav / §3.3 pink = interaction).
+            // Not counted against the §3.5 always-on glow budget.
+            color: $accent-primary-text;
+            box-shadow: 5px 5px 12px $shadow-color, -5px -5px 12px $shadow-highlight-color,
+                        0 0 16px $glow-pink;
           }
         }
 
-        &:hover {
-          // Hover-only pink glow (DESIGN.md §4 header nav / §3.3 pink = interaction).
-          // Not counted against the §3.5 always-on glow budget.
+        &:not(.icon-only):hover {
           box-shadow: $neu-radius $neu-radius $button-blur $shadow-color,
                       (-$neu-radius) (-$neu-radius) $button-blur $shadow-highlight-color,
                       inset $neu-radius $neu-radius $button-blur $shadow-color,
@@ -52,29 +135,6 @@ nav {
   color: var(--text-muted-color);
 }
 
-.site-title {
-  margin-top: 12px;
-  text-align: center;
-  font-size: 32px;
-  font-weight: 400;
-  @include chromatic-split(2.5px);
-}
-
-.header-image {
-  width: 100%;
-  text-align: center;
-  margin: auto auto 3rem;
-
-  img {
-    max-height: 300px;
-    width: 100%;
-    height: auto;
-    vertical-align: middle;
-    margin: auto;
-    object-fit: cover;
-  }
-}
-
 .footer {
   box-shadow: inset 0px 4px 4px  $shadow-color,
              inset 0px -4px 4px $shadow-highlight-color;
@@ -85,4 +145,27 @@ nav {
 
 .content h1 {
   color: $first-color;
+}
+
+// Mock A .na-sectitle: eyebrow label + gradient rule that fills the remaining
+// width. One of the §3.5 "always-on glow" budget entries (always present, both
+// modes — it just amplifies automatically via $glow-pink/$glow-green).
+.section-title {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted-color);
+  margin-bottom: 20px;
+
+  &::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, $first-color, $second-color);
+    box-shadow: 0 0 10px $glow-pink, 0 0 18px $glow-green;
+  }
 }
