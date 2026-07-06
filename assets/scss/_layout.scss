@@ -50,6 +50,7 @@ nav {
   text-align: center;
   font-size: 32px;
   font-weight: 400;
+  @include chromatic-split(2.5px);
 }
 
 .header-image {

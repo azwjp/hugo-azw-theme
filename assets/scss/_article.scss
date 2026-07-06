@@ -21,6 +21,11 @@
     font-weight: 600;
   }
 
+  // Card title chromatic split — hover only (DESIGN.md §3.2), never on the base state.
+  .article-header a:hover h1 {
+    @include chromatic-split(1.5px);
+  }
+
   .article-meta {
     padding: 0;
     vertical-align: bottom;
@@ -138,6 +143,11 @@ article.content h1 {
   border-radius: 32px;
   @include neu-simple(6px, 9px);
   padding: .5em 1em;
+}
+
+// Article title chromatic split — hover only (DESIGN.md §3.2), never on the base state.
+article.content .article-header a:hover h1 {
+  @include chromatic-split(1.5px);
 }
 
 article.content .article-entry {
