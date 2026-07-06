@@ -54,3 +54,18 @@ $wide: 1216px;
   box-shadow: 2px 2px 2px $shadow-color inset,
               -2px -2px 2px $shadow-highlight-color inset;
 }
+
+// Colored glow: the neu-raised shadow with a colored halo layered on top.
+// "Shape is made by shadow, attention is drawn by color" (DESIGN.md §3.1).
+@mixin neu-glow($glow-color, $blur: 12px) {
+  box-shadow: $neu-radius $neu-radius $neu-blur $shadow-color,
+              (-$neu-radius) (-$neu-radius) $neu-blur $shadow-highlight-color,
+              0 0 $blur $glow-color;
+}
+
+// Chromatic split (RGB shift) signature. Usage is restricted — see DESIGN.md §3.2.
+// Never apply to body copy, dates, or widgets.
+@mixin chromatic-split($offset: 2.5px) {
+  text-shadow: (-$offset) 0 0 var(--split-pink),
+               $offset 0 0 var(--split-green);
+}

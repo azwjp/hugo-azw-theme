@@ -2,9 +2,9 @@
 $light-first-color: hsl(337, 68%, 62%);
 $light-first-color2: hsl(337, 50%, 50%);
 $light-first-color3: hsl(337, 21%, 36%);
-$light-second-color: hsl(83, 68%, 62%);
-$light-second-color2: hsl(83, 55%, 45%);
-$light-second-color3: hsl(83, 35%, 62%);
+$light-second-color: #16D977; // accent-secondary-ui (light) — hue migrated 83 -> 148
+$light-second-color2: #007C4B; // accent-secondary-text (light) — hue migrated 83 -> 148
+$light-second-color3: hsl(148, 35%, 62%); // hue migrated 83 -> 148, saturation/lightness kept
 $light-background-color: hsl(337, 20%, 98%);
 $light-text-background-color: scale-color($light-background-color, $lightness: 80%);
 $light-text-background-color2: rgb(249, 239, 246);
@@ -18,8 +18,11 @@ $light-text-color: #4a4a4a; // Bulma's default text color
 $dark-first-color: adjust-color($light-first-color, $lightness: 10%, $saturation: -8%);
 $dark-first-color2: adjust-color($light-first-color2, $lightness: 5%, $saturation: -5%);
 $dark-first-color3: adjust-color($light-first-color3, $lightness: -14%, $saturation: 9%);
-$dark-second-color: adjust-color($light-second-color, $lightness: -17%, $saturation: -8%);
-$dark-second-color2: adjust-color($light-second-color2, $lightness: -5%, $saturation: -5%);
+// adjust-color() on the new hue-148 base drifts far from the brand dark green (#1AEA7C):
+// computed $dark-second-color ~= #14844C, $dark-second-color2 ~= #02603B. Both are pinned
+// directly to the brand value instead (DESIGN.md §2.2 accent-secondary-ui/text dark = #1AEA7C).
+$dark-second-color: #1AEA7C;
+$dark-second-color2: #1AEA7C;
 $dark-second-color3: adjust-color($light-second-color3, $lightness: -12%, $saturation: 5%);
 $dark-background-color: hsl(220, 15%, 15%); // Completely different hue for better dark mode
 $dark-text-background-color: adjust-color($dark-background-color, $lightness: 5%);
@@ -46,6 +49,12 @@ $dark-text-color: adjust-color($light-text-color, $lightness: 50%);
   --link-color: #{$light-link-color};
   --link-text-color: #{$light-link-text-color};
   --strong-text-color: var(--second-color2);
+  // Chromatic split / glow tokens (DESIGN.md §2.3). Kept as one block so a future
+  // :root[data-theme="dark"] override can redefine this whole set at once.
+  --glow-pink: rgba(220, 79, 136, 0.22);
+  --glow-green: rgba(22, 217, 119, 0.22);
+  --split-pink: rgba(220, 79, 136, 0.55);
+  --split-green: rgba(13, 176, 103, 0.50);
   --box-shadow-color: #{rgba(adjust-color($light-first-color, $lightness: -18%, $saturation: -43%), 0.15)};
   --box-shadow-highlight-color: rgba(255, 255, 255, 1);
   --box-shadow-enlight-color: rgba(255, 255, 255, 0.2);
@@ -69,6 +78,11 @@ $dark-text-color: adjust-color($light-text-color, $lightness: 50%);
     --link-hover-color: #{$dark-link-hover-color};
     --link-color: #{$dark-link-color};
     --link-text-color: #{$dark-link-text-color};
+    // Chromatic split / glow tokens (DESIGN.md §2.3) — dark set, same block shape as light.
+    --glow-pink: rgba(234, 92, 153, 0.40);
+    --glow-green: rgba(26, 234, 124, 0.35);
+    --split-pink: rgba(234, 92, 153, 0.75);
+    --split-green: rgba(26, 234, 124, 0.65);
     --box-shadow-color: #{rgba(adjust-color($dark-background-color, $lightness: -5%), 0.5)};
     --box-shadow-highlight-color: #{rgba(adjust-color($dark-background-color, $lightness: 15%), 0.5)};
     --box-shadow-enlight-color: #{rgba(adjust-color($dark-background-color, $lightness: 15%), 0.2)};
@@ -91,6 +105,10 @@ $link-hover-color: var(--link-hover-color);
 $link-color: var(--link-color);
 $link-text-color: var(--link-text-color);
 $strong-text-color: var(--strong-text-color);
+$glow-pink: var(--glow-pink);
+$glow-green: var(--glow-green);
+$split-pink: var(--split-pink);
+$split-green: var(--split-green);
 $shadow-color: var(--box-shadow-color);
 $shadow-highlight-color: var(--box-shadow-highlight-color);
 $shadow-enlight-color: var(--box-shadow-enlight-color);
