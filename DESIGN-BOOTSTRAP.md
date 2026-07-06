@@ -16,15 +16,19 @@
 ## 1. 作業環境の注意(このリポジトリ固有)
 
 - このテーマは親リポジトリ azw-blog の **git submodule**。コミットはテーマ側で行い、親リポジトリで submodule 参照を更新する(2段階コミット)。
-- Hugo はビルドを**親リポジトリから**実行する。`hugo` は PATH にない — 親リポジトリ直下の `./hugo.exe` を使う(extended 0.158.0)。
+- Hugo はビルドを**親リポジトリから**実行する。`hugo` は PATH にない — 親リポジトリ直下の未追跡バイナリを使う(macOS では `./hugo`、Windows では `./hugo.exe`。extended **0.147.5**)。
   ```bash
-  cd ../..           # azw-blog ルートへ
-  ./hugo.exe server  # ローカル確認
+  cd ../..          # azw-blog ルートへ
+  ./hugo server     # ローカル確認(macOS)
   ```
 - Bulma 0.9.0 が CDN で読み込まれており、詳細度の戦いが起きやすい(タグ `.tag` などは Bulma のクラス)。既存コードが `// override bulma` とコメントしている箇所が参考になる。
 - Prism.js の CSS は `prism--` プレフィックス付き(親リポジトリ側 `static/css/`)。本文コードブロックの見た目には触れない(DESIGN.md §4「本文」)。
 
 ## 2. 現状インベントリ(2026-07-06 時点)
+
+> **注意(2026-07-07):** 以下の行番号・セレクタ名は改修前のスナップショットであり、全面改修後の現状とは一致しない
+> (例: `.list-tags .tag` → `.pill` に置換済み)。現在の構成は CLAUDE.md の Template Hierarchy / Styling 節を参照。
+> この節は「移行時に何がどこにあったか」の記録としてのみ残す。
 
 ### 2.1 SCSS 構成(すべて `assets/scss/`)
 
@@ -132,12 +136,9 @@
 
 ## 6. 検証方法
 
-- `./hugo.exe server`(親リポジトリから)で http://localhost:1313 を確認。
-- ダークモードは DevTools → Rendering → "Emulate CSS media feature prefers-color-scheme" で切替確認。
-- コントラスト: DevTools の要素インスペクタで、`--accent-*-text` を使った文字が AA(4.5:1)を満たすこと。
-  特に Phase 0 のグリーン文字(`#007C4B` on light 背景)と Phase 3 のリンク色。
-- 確認ページ: トップ(カード一覧・ページネーション)、記事ページ(強調テキスト・コードブロック・シェアボタン)、
-  カテゴリ/タグ一覧(ウィジェット・タグ)。
+**恒久的な検証手順は CLAUDE.md の「Verification Checklist for Visual Changes」に移管した**(実ブラウザで light/dark 両モード、
+トップ/記事/タクソノミー+モバイル幅、コントラストは計算で AA 判定、常時グロー3種以内、コンソールエラー/404 ゼロ)。
+2026-07 の移行検証は Playwright(chromium、`colorScheme` エミュレーション)+ computed style のモック値照合で実施した。
 
 ## 7. 完了条件
 
