@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 `hugo-azw-theme` is a custom Hugo theme for [blog.azw.jp](https://blog.azw.jp/). It is used as a git submodule from the parent blog repository at `../..` (the azw-blog root). The parent repo's CLAUDE.md has additional context about the overall blog setup.
 
+**Design system**: All visual/styling work MUST follow `DESIGN.md` (Chromatic Neumorphism — design rules and the reasoning behind them). During the initial migration, `DESIGN-BOOTSTRAP.md` holds the one-time migration plan; it is deleted once migration is complete.
+
 ## Development
 
 ```bash
