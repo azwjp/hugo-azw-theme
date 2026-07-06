@@ -5,12 +5,19 @@ $light-first-color3: hsl(337, 21%, 36%);
 $light-second-color: #16D977; // accent-secondary-ui (light) — hue migrated 83 -> 148
 $light-second-color2: #007C4B; // accent-secondary-text (light) — hue migrated 83 -> 148
 $light-second-color3: hsl(148, 35%, 62%); // hue migrated 83 -> 148, saturation/lightness kept
-$light-background-color: hsl(337, 20%, 98%);
+// accent-primary-text (DESIGN.md §2.2): pink text tone, distinct from $light-first-color
+// (which serves as the UI/border/glow tone). Needed for AA contrast on body text/links.
+$light-accent-primary-text: #BF386E;
+// Phase 3 (DESIGN.md §5-3): light background lowered 98% -> 95% for more neumorphic contrast
+// against the white highlight shadow (DESIGN-BOOTSTRAP.md §5.1 — decided 2026-07-06 after
+// comparing 98/96/95% screenshots; 95% approved).
+$light-background-color: hsl(337, 20%, 95%);
 $light-text-background-color: scale-color($light-background-color, $lightness: 80%);
 $light-text-background-color2: rgb(249, 239, 246);
-$light-link-hover-color: hsl(194, 86%, 51%);
+// Phase 3 (DESIGN.md §5-3): migrated off the legacy cyan (hue 194) onto accent-primary-text.
+$light-link-hover-color: $light-accent-primary-text;
 $light-link-color: #666;
-$light-link-text-color: hsl(194, 70%, 38%);
+$light-link-text-color: $light-accent-primary-text;
 $light-text-muted-color: #6F6F6F;
 $light-text-color: #4a4a4a; // Bulma's default text color
 
@@ -24,12 +31,14 @@ $dark-first-color3: adjust-color($light-first-color3, $lightness: -14%, $saturat
 $dark-second-color: #1AEA7C;
 $dark-second-color2: #1AEA7C;
 $dark-second-color3: adjust-color($light-second-color3, $lightness: -12%, $saturation: 5%);
+$dark-accent-primary-text: #F077B0; // DESIGN.md §2.2 accent-primary-text dark
 $dark-background-color: hsl(220, 15%, 15%); // Completely different hue for better dark mode
 $dark-text-background-color: adjust-color($dark-background-color, $lightness: 5%);
 $dark-text-background-color2: adjust-color($dark-background-color, $lightness: 3%);
-$dark-link-hover-color: adjust-color($light-link-hover-color, $lightness: 9%, $saturation: 4%);
+// Phase 3: both pinned to accent-primary-text dark (no longer derived from the cyan light value).
+$dark-link-hover-color: $dark-accent-primary-text;
 $dark-link-color: adjust-color($light-link-color, $lightness: 14%, $saturation: 0%);
-$dark-link-text-color: adjust-color($light-link-text-color, $lightness: 22%, $saturation: 0%);
+$dark-link-text-color: $dark-accent-primary-text;
 $dark-text-muted-color: adjust-color($light-text-muted-color, $lightness: 30%);
 $dark-text-color: adjust-color($light-text-color, $lightness: 50%);
 
@@ -49,12 +58,18 @@ $dark-text-color: adjust-color($light-text-color, $lightness: 50%);
   --link-color: #{$light-link-color};
   --link-text-color: #{$light-link-text-color};
   --strong-text-color: var(--second-color2);
+  --accent-primary-text: #{$light-accent-primary-text};
   // Chromatic split / glow tokens (DESIGN.md §2.3). Kept as one block so a future
   // :root[data-theme="dark"] override can redefine this whole set at once.
   --glow-pink: rgba(220, 79, 136, 0.22);
   --glow-green: rgba(22, 217, 119, 0.22);
   --split-pink: rgba(220, 79, 136, 0.55);
   --split-green: rgba(13, 176, 103, 0.50);
+  // Phase 3 (DESIGN.md §4 pagination / §3.3 divider): implementation tokens so the
+  // light/dark presence-vs-absence difference lives in _variables.scss (§3.4), not
+  // as a media query duplicated in _components.scss / _article.scss.
+  --pagination-active-glow: none;
+  --divider-glow: none;
   --box-shadow-color: #{rgba(adjust-color($light-first-color, $lightness: -18%, $saturation: -43%), 0.15)};
   --box-shadow-highlight-color: rgba(255, 255, 255, 1);
   --box-shadow-enlight-color: rgba(255, 255, 255, 0.2);
@@ -78,11 +93,15 @@ $dark-text-color: adjust-color($light-text-color, $lightness: 50%);
     --link-hover-color: #{$dark-link-hover-color};
     --link-color: #{$dark-link-color};
     --link-text-color: #{$dark-link-text-color};
+    --accent-primary-text: #{$dark-accent-primary-text};
     // Chromatic split / glow tokens (DESIGN.md §2.3) — dark set, same block shape as light.
     --glow-pink: rgba(234, 92, 153, 0.40);
     --glow-green: rgba(26, 234, 124, 0.35);
     --split-pink: rgba(234, 92, 153, 0.75);
     --split-green: rgba(26, 234, 124, 0.65);
+    // Dark = amplified (DESIGN.md §1.4): these two turn "on" only here.
+    --pagination-active-glow: 0 0 16px var(--glow-pink);
+    --divider-glow: 0 0 10px var(--glow-pink), 0 0 10px var(--glow-green);
     --box-shadow-color: #{rgba(adjust-color($dark-background-color, $lightness: -5%), 0.5)};
     --box-shadow-highlight-color: #{rgba(adjust-color($dark-background-color, $lightness: 15%), 0.5)};
     --box-shadow-enlight-color: #{rgba(adjust-color($dark-background-color, $lightness: 15%), 0.2)};
@@ -105,10 +124,13 @@ $link-hover-color: var(--link-hover-color);
 $link-color: var(--link-color);
 $link-text-color: var(--link-text-color);
 $strong-text-color: var(--strong-text-color);
+$accent-primary-text: var(--accent-primary-text);
 $glow-pink: var(--glow-pink);
 $glow-green: var(--glow-green);
 $split-pink: var(--split-pink);
 $split-green: var(--split-green);
+$pagination-active-glow: var(--pagination-active-glow);
+$divider-glow: var(--divider-glow);
 $shadow-color: var(--box-shadow-color);
 $shadow-highlight-color: var(--box-shadow-highlight-color);
 $shadow-enlight-color: var(--box-shadow-enlight-color);

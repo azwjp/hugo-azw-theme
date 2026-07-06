@@ -94,6 +94,9 @@ ul {
         background-color: $first-color;
         font-weight: bold;
         height: 100%;
+        // Phase 3 (DESIGN.md §4 pagination): dark-only glow via --pagination-active-glow
+        // (light value is "none", so light is unaffected — DESIGN.md §3.4).
+        box-shadow: $pagination-active-glow;
       }
 
       &:not(.active) {
