@@ -220,6 +220,13 @@ article.content .article-entry {
     flex-wrap: wrap;
     gap: 14px;
     margin: 1em 1em;
+
+    // Without a featured image this is the first child, so its top margin
+    // would collapse outside the article card instead of creating an inset.
+    &:first-child {
+      margin-top: 0;
+      padding-top: 1em;
+    }
   }
 }
 
