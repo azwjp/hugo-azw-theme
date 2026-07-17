@@ -1,10 +1,11 @@
 // Mock A .na-tag / .na-tag.na-g: pill-shaped category/tag chips shared by article
 // cards (post/tags.html) and the sidebar tag widget. Pink = tags (interaction,
 // DESIGN.md §3.3); green = categories (structure).
-// Bulma's `.content ul { list-style: disc; margin-left: 2em; }` (specificity
-// 0-1-1) otherwise beats a bare `.tag-pills` (0-1-0) since .tag-pills always
-// lives inside a `.content` ancestor (main#content or article.content) —
-// qualify with it so the bullet/indent reset actually wins.
+// Bulma's `.content ul { list-style: disc; margin-left: 2em; }` and the article
+// body's more-specific `article.content .article-entry ul` otherwise beat the
+// shared reset in their respective contexts. Keep the article-meta override
+// narrowly scoped so ordinary article lists retain their body indentation.
+article.content .article-entry .article-meta .tag-pills,
 .content .tag-pills,
 .tag-pills {
   display: flex;
