@@ -110,6 +110,13 @@ article.content .article-entry {
     }
   }
 
+  & > img {
+    max-width: calc(100% - 5.5em);
+    @include smaller {
+      max-width: calc(100% - 2em);
+    }
+  }
+
   & > p {
     margin-top: 1em;
     margin-bottom: 1.5em;
@@ -146,7 +153,8 @@ article.content .article-entry {
     }
   }
 
-  ul {
+  ul,
+  ol {
     margin-left: 5em;
     @include smaller {
       margin-left: 3em;
