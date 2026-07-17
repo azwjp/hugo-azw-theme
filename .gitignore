@@ -1,0 +1,4 @@
+/.hugo_build.lock
+/resources/_gen
+/exampleSite/.hugo_build.lock
+/exampleSite/resources/_gen
