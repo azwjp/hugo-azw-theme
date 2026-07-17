@@ -5,6 +5,12 @@
   margin: 0 auto;
   padding: 0 32px;
 
+  // The TOC and sidebar are already fixed-width rails in the widest layout.
+  // Give the remaining viewport width to the main column.
+  @include wide {
+    max-width: none;
+  }
+
   @include smaller {
     padding: 0 16px;
   }
